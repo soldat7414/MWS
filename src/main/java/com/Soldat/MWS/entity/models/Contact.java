@@ -17,7 +17,7 @@ public class Contact {
         Contact contact = new Contact();
         contact.setId(entity.getId());
         contact.setContact(entity.getContact());
-        contact.getSpecies(entity.getSpecies().toString());
+        contact.setSpecies(entity.getSpecies());
 
         return contact;
     }
@@ -30,8 +30,6 @@ public class Contact {
     }
 
     //getters and setters
-
-
     public long getId() {
         return id;
     }
@@ -48,7 +46,7 @@ public class Contact {
         this.contact = contact;
     }
 
-    public String getSpecies(String s) {
+    public String getSpecies() {
         return species;
     }
 

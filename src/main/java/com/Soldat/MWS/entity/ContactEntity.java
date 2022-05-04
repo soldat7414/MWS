@@ -5,14 +5,14 @@ import com.Soldat.MWS.entity.models.Contact;
 import javax.persistence.*;
 import java.util.List;
 
-@Entity (name = "phone")
+@Entity(name = "contact")
 public class ContactEntity {
     //fields
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String contact;
-    private Species species;
+    private String species;
     //connections
     //person who's is this number
     @ManyToOne
@@ -23,7 +23,7 @@ public class ContactEntity {
     public ContactEntity() {
     }
 
-    public Contact toModel(){
+    public Contact toModel() {
         return Contact.toModel(this);
     }
 
@@ -54,30 +54,11 @@ public class ContactEntity {
         this.person = person;
     }
 
-    public Species getSpecies() {
+    public String getSpecies() {
         return species;
     }
 
-    public void setSpecies(Species species) {
+    public void setSpecies(String species) {
         this.species = species;
-    }
-    public enum Species {
-        PHONE_NUMBER ("phone number"),
-        E_MAIL ("e-mail");
-
-        private String title;
-
-        Species(String title) {
-            this.title = title;
-        }
-
-        public String getTitle() {
-            return title;
-        }
-
-        @Override
-        public String toString() {
-            return title;
-        }
     }
 }

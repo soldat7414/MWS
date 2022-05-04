@@ -1,7 +1,9 @@
 package com.Soldat.MWS.controllers;
 
 import com.Soldat.MWS.entity.AddressEntity;
+import com.Soldat.MWS.entity.ContactEntity;
 import com.Soldat.MWS.entity.models.Address;
+import com.Soldat.MWS.entity.models.Contact;
 import com.Soldat.MWS.exceptions.AlreadyExistException;
 import com.Soldat.MWS.exceptions.NotFoundException;
 import com.Soldat.MWS.services.ServiceE;
@@ -11,25 +13,25 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/address")
-public class AddressController {
+@RequestMapping("/contacts")
+public class ContactController {
 
     @Autowired
-    ServiceE<AddressEntity> service;
+    ServiceE<ContactEntity> service;
 
     @GetMapping
     public ResponseEntity getAll() {
         try {
-            return ResponseEntity.ok(Address.toModelList(service.getAll()));
+            return ResponseEntity.ok(Contact.toModelList(service.getAll()));
         } catch (Exception ex) {
             return ResponseEntity.badRequest().body(ex.getMessage());
         }
     }
 
     @PostMapping
-    public ResponseEntity add(@RequestBody AddressEntity address) {
+    public ResponseEntity add(@RequestBody ContactEntity contact) {
         try {
-            return ResponseEntity.ok(service.add(address).toModel());
+            return ResponseEntity.ok(service.add(contact).toModel());
         } catch (AlreadyExistException ex) {
             return ResponseEntity.badRequest().body(ex.getMessage() + ex.getId());
         }
@@ -45,10 +47,10 @@ public class AddressController {
     }
 
     @PutMapping
-    public ResponseEntity addPerson(@RequestParam long idAddr,
+    public ResponseEntity addPerson(@RequestParam long idContact,
                                     @RequestParam long idPers) {
         try {
-            return ResponseEntity.ok(service.edit(idAddr, idPers, Functions.ADD_PERSON).toModel());
+            return ResponseEntity.ok(service.edit(idContact, idPers, Functions.ADD_PERSON).toModel());
         } catch (NotFoundException ex) {
             return ResponseEntity.badRequest().body(ex.getMessage());
         }

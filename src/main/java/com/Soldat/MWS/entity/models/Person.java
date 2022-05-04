@@ -1,9 +1,11 @@
 package com.Soldat.MWS.entity.models;
 
+import com.Soldat.MWS.entity.ContactEntity;
 import com.Soldat.MWS.entity.PersonEntity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Person {
@@ -14,6 +16,7 @@ public class Person {
     private String surname;
     private String position;
     private Address address;
+    private List<Contact> contacts;
 
     //to model
     //@Override
@@ -25,6 +28,8 @@ public class Person {
         person.setSurname(personEntity.getSurname());
         person.setPosition(personEntity.getPosition());
         if(personEntity.getAddress()!=null)person.setAddress(personEntity.getAddress().toModel());
+        if(personEntity.getPhoneNumbers()!=null)person.setContacts(personEntity.getPhoneNumbers().stream()
+                .map(Contact::toModel).collect(Collectors.toList()));
         return person;
     }
 
@@ -85,7 +90,11 @@ public class Person {
         this.position = position;
     }
 
+    public List<Contact> getContacts() {
+        return contacts;
+    }
 
-
-
+    public void setContacts(List<Contact> contacts) {
+        this.contacts = contacts;
+    }
 }
