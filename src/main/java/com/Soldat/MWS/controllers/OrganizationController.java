@@ -65,4 +65,14 @@ public class OrganizationController {
             return ResponseEntity.badRequest().body(ex.getMessage());
         }
     }
+
+    @PutMapping("{id}")
+    public ResponseEntity edit(@RequestBody OrganizationEntity entity,
+                               @PathVariable long id){
+        try {
+            return ResponseEntity.ok(service.edit(id, entity).toModel());
+        } catch (NotFoundException ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }
+    }
 }

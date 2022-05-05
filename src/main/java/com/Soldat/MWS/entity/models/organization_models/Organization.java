@@ -29,15 +29,15 @@ public class Organization{
         Organization organization = new Organization();
         organization.setId(orgEntity.getId());
         organization.setTitle(orgEntity.getTitle());
-        if(organization.getContrParty()!=null)organization.setContrParty(orgEntity.getContrParty());
-        if(organization.getEmployees()!=null)organization.setEmployees(PersonWithoutLinks.toModelList(orgEntity.getEmployees()));
+        if(orgEntity.getContrParty()!=null)organization.setContrParty(orgEntity.getContrParty());
+        if(orgEntity.getEmployees()!=null)organization.setEmployees(PersonWithoutLinks.toModelList(orgEntity.getEmployees()));
 //        if(organization.getObjects()!=null)organization.setObjects(new ToModelList<Object, ObjectEntity>().parse(orgEntity.getObjects()));
 //        if(organization.getDocuments()!=null)organization.setDocuments(new ToModelList<Document, DocumentEntity>().parse(orgEntity.getDocuments()));
 //        if(organization.getObjectCustomer()!=null)organization.setObjectCustomer(new ToModelList<Object, ObjectEntity>().parse(orgEntity.getObjectCustomer()));
 //        if(organization.getCorrespondenceFrom()!=null)organization.setCorrespondenceFrom(new ToModelList<Correspondence, CorrespondenceEntity>().parse(orgEntity.getCorrespondenceFrom()));
 //        if(organization.getCorrespondenceTo()!=null)organization.setCorrespondenceTo(new Correspondence().toModel(orgEntity.getCorrespondenceTo()));
-        if(organization.getAddress()!=null)organization.setAddress(orgEntity.getAddress().toModel());
-        if(organization.getContacts()!=null)organization.setContacts(Contact.toModelList(orgEntity.getContacts()));
+        if(orgEntity.getAddress()!=null)organization.setAddress(orgEntity.getAddress().toModel());
+        if(orgEntity.getContacts()!=null)organization.setContacts(Contact.toModelList(orgEntity.getContacts()));
         return organization;
     }
 

@@ -1,5 +1,6 @@
 package com.Soldat.MWS.controllers;
 
+import com.Soldat.MWS.entity.OrganizationEntity;
 import com.Soldat.MWS.entity.PersonEntity;
 import com.Soldat.MWS.entity.models.person_models.Person;
 import com.Soldat.MWS.exceptions.AlreadyExistException;
@@ -59,6 +60,16 @@ public class PersonController {
                                   @RequestParam String function) {
         try {
             return ResponseEntity.ok(service.binding(idPers, idOrg, Functions.valueOf(function)).toModel());
+        } catch (NotFoundException ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity edit(@RequestBody PersonEntity entity,
+                               @PathVariable long id){
+        try {
+            return ResponseEntity.ok(service.edit(id, entity).toModel());
         } catch (NotFoundException ex) {
             return ResponseEntity.badRequest().body(ex.getMessage());
         }

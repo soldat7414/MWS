@@ -1,6 +1,7 @@
 package com.Soldat.MWS.controllers;
 
 import com.Soldat.MWS.entity.AddressEntity;
+import com.Soldat.MWS.entity.OrganizationEntity;
 import com.Soldat.MWS.entity.models.address_models.Address;
 import com.Soldat.MWS.exceptions.AlreadyExistException;
 import com.Soldat.MWS.exceptions.NotFoundException;
@@ -45,11 +46,21 @@ public class AddressController {
     }
 
     @PutMapping
-    public ResponseEntity addPerson(@RequestParam long idAddr,
-                                    @RequestParam long idPers,
-                                    @RequestParam String function) {
+    public ResponseEntity binding(@RequestParam long idAddr,
+                                  @RequestParam long idPers,
+                                  @RequestParam String function) {
         try {
             return ResponseEntity.ok(service.binding(idAddr, idPers, Functions.valueOf(function)).toModel());
+        } catch (NotFoundException ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity edit(@RequestBody AddressEntity entity,
+                               @PathVariable long id) {
+        try {
+            return ResponseEntity.ok(service.edit(id, entity).toModel());
         } catch (NotFoundException ex) {
             return ResponseEntity.badRequest().body(ex.getMessage());
         }
