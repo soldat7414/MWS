@@ -1,9 +1,9 @@
 package com.Soldat.MWS.entity;
 
-import com.Soldat.MWS.entity.models.Contact;
+import com.Soldat.MWS.entity.models.contact_models.Contact;
+import com.Soldat.MWS.entity.models.organization_models.Organization;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity(name = "contact")
 public class ContactEntity {
@@ -13,11 +13,15 @@ public class ContactEntity {
     private long id;
     private String contact;
     private String species;
-    //connections
-    //person who's is this number
+    //links
+    //person who's is this contact
     @ManyToOne
     @PrimaryKeyJoinColumn
     private PersonEntity person;
+    //organization who's is this contact
+    @ManyToOne
+    @PrimaryKeyJoinColumn
+    private OrganizationEntity organization;
 
     //constructors
     public ContactEntity() {
@@ -60,5 +64,13 @@ public class ContactEntity {
 
     public void setSpecies(String species) {
         this.species = species;
+    }
+
+    public OrganizationEntity getOrganization() {
+        return organization;
+    }
+
+    public void setOrganization(OrganizationEntity organization) {
+        this.organization = organization;
     }
 }

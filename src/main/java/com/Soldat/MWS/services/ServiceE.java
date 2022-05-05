@@ -13,6 +13,7 @@ public interface ServiceE<E> {
     E getById (long id) throws NotFoundException;
     List<E> getAll ();
     long delete (long id) throws NotFoundException;
-    E edit(long entityId, long fieldId, Functions function) throws NotFoundException;
+    E binding(long entityId, long fieldId, Functions function) throws NotFoundException;
+    E edit (long id, E entity) throws NotFoundException;
 
 }

@@ -1,6 +1,8 @@
 package com.Soldat.MWS.controllers;
 
+import com.Soldat.MWS.entity.OrganizationEntity;
 import com.Soldat.MWS.entity.PersonEntity;
+import com.Soldat.MWS.entity.models.organization_models.Organization;
 import com.Soldat.MWS.entity.models.person_models.Person;
 import com.Soldat.MWS.exceptions.AlreadyExistException;
 import com.Soldat.MWS.exceptions.NotFoundException;
@@ -11,16 +13,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/person")
-public class PersonController {
+@RequestMapping("/organization")
+public class OrganizationController {
 
     @Autowired
-    ServiceE<PersonEntity> service;
+    ServiceE<OrganizationEntity> service;
 
     @GetMapping
     public ResponseEntity getAll() {
         try {
-            return ResponseEntity.ok(Person.toModelList(service.getAll()));
+            return ResponseEntity.ok(Organization.toModelList(service.getAll()));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.toString());
         }
@@ -36,9 +38,9 @@ public class PersonController {
     }
 
     @PostMapping
-    public ResponseEntity add(@RequestBody PersonEntity person) {
+    public ResponseEntity add(@RequestBody OrganizationEntity org) {
         try {
-            return ResponseEntity.ok(service.add(person).toModel());
+            return ResponseEntity.ok(service.add(org).toModel());
         } catch (AlreadyExistException ex) {
             return ResponseEntity.badRequest().body(ex.getMessage() + ex.getId());
         }
@@ -56,9 +58,9 @@ public class PersonController {
     @PutMapping
     public ResponseEntity binding(@RequestParam long idPers,
                                   @RequestParam long idOrg,
-                                  @RequestParam String function) {
+                                  @RequestParam Functions function) {
         try {
-            return ResponseEntity.ok(service.binding(idPers, idOrg, Functions.valueOf(function)).toModel());
+            return ResponseEntity.ok(service.binding(idPers, idOrg, function).toModel());
         } catch (NotFoundException ex) {
             return ResponseEntity.badRequest().body(ex.getMessage());
         }

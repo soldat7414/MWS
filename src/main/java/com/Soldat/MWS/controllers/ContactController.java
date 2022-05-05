@@ -1,9 +1,7 @@
 package com.Soldat.MWS.controllers;
 
-import com.Soldat.MWS.entity.AddressEntity;
 import com.Soldat.MWS.entity.ContactEntity;
-import com.Soldat.MWS.entity.models.Address;
-import com.Soldat.MWS.entity.models.Contact;
+import com.Soldat.MWS.entity.models.contact_models.Contact;
 import com.Soldat.MWS.exceptions.AlreadyExistException;
 import com.Soldat.MWS.exceptions.NotFoundException;
 import com.Soldat.MWS.services.ServiceE;
@@ -47,10 +45,11 @@ public class ContactController {
     }
 
     @PutMapping
-    public ResponseEntity addPerson(@RequestParam long idContact,
-                                    @RequestParam long idPers) {
+    public ResponseEntity binding(@RequestParam long idContact,
+                                  @RequestParam long idPers,
+                                  @RequestParam Functions function) {
         try {
-            return ResponseEntity.ok(service.edit(idContact, idPers, Functions.ADD_PERSON).toModel());
+            return ResponseEntity.ok(service.binding(idContact, idPers, function).toModel());
         } catch (NotFoundException ex) {
             return ResponseEntity.badRequest().body(ex.getMessage());
         }

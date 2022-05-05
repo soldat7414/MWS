@@ -1,4 +1,4 @@
-package com.Soldat.MWS.entity.models;
+package com.Soldat.MWS.entity.models.address_models;
 
 
 import com.Soldat.MWS.entity.AddressEntity;

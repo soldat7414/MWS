@@ -2,7 +2,9 @@ package com.Soldat.MWS.services.impl;
 
 import com.Soldat.MWS.entity.AddressEntity;
 import com.Soldat.MWS.entity.ContactEntity;
+import com.Soldat.MWS.entity.OrganizationEntity;
 import com.Soldat.MWS.entity.PersonEntity;
+import com.Soldat.MWS.entity.models.contact_models.Contact;
 import com.Soldat.MWS.exceptions.ContactAlreadyExistException;
 import com.Soldat.MWS.exceptions.ContactNotFoundException;
 import com.Soldat.MWS.exceptions.NotFoundException;
@@ -26,6 +28,8 @@ public class ContactServiceImpl implements ContactService {
     ContactRepo repo;
     @Autowired
     ServiceE<PersonEntity> personService;
+    @Autowired
+    ServiceE<OrganizationEntity> orgService;
 
     @Override
     public ContactEntity add(ContactEntity entity) throws ContactAlreadyExistException {
@@ -36,7 +40,7 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    public ContactEntity getById(long id) throws NotFoundException {
+    public ContactEntity getById(long id) throws ContactNotFoundException {
         Optional<ContactEntity> contact = repo.findById(id);
         if(contact.isPresent()) return contact.get();
         else throw new ContactNotFoundException("Такого контакту не знайдено.");
@@ -51,22 +55,37 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    public long delete(long id) throws NotFoundException {
+    public long delete(long id) throws ContactNotFoundException {
         ContactEntity contact = this.getById(id);
         repo.delete(contact);
         return id;
     }
 
     @Override
-    public ContactEntity edit(long entityId, long fieldId, Functions function) throws NotFoundException {
+    public ContactEntity edit(long id, ContactEntity entity) throws ContactNotFoundException {
+        ContactEntity contact = this.getById(id);
+        if(entity.getContact()!=null)contact.setContact(entity.getContact());
+        if(entity.getSpecies()!=null)contact.setSpecies(entity.getSpecies());
+        if(entity.getPerson()!=null)contact.setPerson(entity.getPerson());
+        if(entity.getOrganization()!=null)contact.setOrganization(entity.getOrganization());
+        return repo.save(contact);
+    }
+
+    @Override
+    public ContactEntity binding(long entityId, long linkId, Functions function) throws NotFoundException {
+        ContactEntity contact = this.getById(entityId);
         switch (function){
             case ADD_PERSON:{
-                ContactEntity contact = this.getById(entityId);
-                PersonEntity person = personService.getById(fieldId);
+                PersonEntity person = personService.getById(linkId);
                 contact.setPerson(person);
-                return repo.save(contact);
+                break;
+            }
+            case ADD_ORGANIZATION:{
+                OrganizationEntity org = orgService.getById(linkId);
+                contact.setOrganization(org);
+                break;
             }
         }
-        return null;
+        return repo.save(contact);
     }
 }

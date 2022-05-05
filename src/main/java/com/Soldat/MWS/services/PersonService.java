@@ -1,6 +1,7 @@
 package com.Soldat.MWS.services;
 
 import com.Soldat.MWS.entity.PersonEntity;
+import com.Soldat.MWS.entity.models.person_models.Person;
 import com.Soldat.MWS.exceptions.NotFoundException;
 import com.Soldat.MWS.exceptions.PersonAlreadyExistException;
 import com.Soldat.MWS.exceptions.PersonNotFoundException;
@@ -22,5 +23,8 @@ public interface PersonService extends ServiceE<PersonEntity> {
     long delete(long id) throws PersonNotFoundException;
 
     @Override
-    PersonEntity edit(long entityId, long fieldId, Functions function) throws NotFoundException;
+    PersonEntity binding(long entityId, long fieldId, Functions function) throws NotFoundException;
+
+    @Override
+    PersonEntity edit(long id, PersonEntity entity) throws PersonNotFoundException;
 }

@@ -1,7 +1,7 @@
 package com.Soldat.MWS.entity;
 
 
-import com.Soldat.MWS.entity.models.Person;
+import com.Soldat.MWS.entity.models.person_models.Person;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -26,6 +26,10 @@ public class PersonEntity {
     //phone numbers
     @OneToMany(cascade=CascadeType.ALL, mappedBy="person")
     private List<ContactEntity> phoneNumbers = new ArrayList<>();
+    //organization, where person works
+    @ManyToOne
+    @PrimaryKeyJoinColumn
+    private OrganizationEntity organization;
 
     //constructors
     public PersonEntity() {
@@ -59,6 +63,10 @@ public class PersonEntity {
 
     public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -109,4 +117,11 @@ public class PersonEntity {
         this.phoneNumbers = phoneNumbers;
     }
 
+    public OrganizationEntity getOrganization() {
+        return organization;
+    }
+
+    public void setOrganization(OrganizationEntity organization) {
+        this.organization = organization;
+    }
 }

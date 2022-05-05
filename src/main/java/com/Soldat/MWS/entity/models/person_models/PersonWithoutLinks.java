@@ -1,14 +1,13 @@
-package com.Soldat.MWS.entity.models;
+package com.Soldat.MWS.entity.models.person_models;
 
-import com.Soldat.MWS.entity.ContactEntity;
 import com.Soldat.MWS.entity.PersonEntity;
+import com.Soldat.MWS.entity.models.address_models.Address;
+import com.Soldat.MWS.entity.models.contact_models.Contact;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class Person {
+public class PersonWithoutLinks extends Person {
     //fields
     private long id;
     private String firstName;
@@ -21,7 +20,7 @@ public class Person {
     //to model
     //@Override
     public static Person toModel(PersonEntity personEntity) {
-        Person person = new Person();
+        PersonWithoutLinks person = new PersonWithoutLinks();
         person.setId(personEntity.getId());
         person.setFirstName(personEntity.getFirstName());
         person.setLastName(personEntity.getLastName());
@@ -34,11 +33,11 @@ public class Person {
     }
 
     public static List<Person> toModelList(List<PersonEntity> entities) {
-        return entities.stream().map(PersonEntity::toModel).collect(Collectors.toList());
+        return entities.stream().map(PersonWithoutLinks::toModel).collect(Collectors.toList());
     }
 
     //constructors
-    public Person() {
+    public PersonWithoutLinks() {
     }
     //getters and setters
 

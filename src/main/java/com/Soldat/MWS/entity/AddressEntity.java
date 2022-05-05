@@ -1,9 +1,8 @@
 package com.Soldat.MWS.entity;
 
-import com.Soldat.MWS.entity.models.Address;
+import com.Soldat.MWS.entity.models.address_models.Address;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity(name = "address")
 public class AddressEntity {
@@ -23,6 +22,10 @@ public class AddressEntity {
     @OneToOne
     @PrimaryKeyJoinColumn
     private PersonEntity person;
+    @OneToOne
+    @PrimaryKeyJoinColumn
+    private OrganizationEntity organization;
+
 
 
     //constructors
@@ -117,15 +120,12 @@ public class AddressEntity {
         this.person = person;
     }
 
-    @Override
-    public String toString() {
-        return "Address{" +
-                "country='" + country + '\'' +
-                ", region='" + region + '\'' +
-                ", district='" + district + '\'' +
-                ", locality='" + locality + '\'' +
-                ", street='" + street + '\'' +
-                ", building='" + building + '\'' +
-                '}';
+    public OrganizationEntity getOrganization() {
+        return organization;
     }
+
+    public void setOrganization(OrganizationEntity organization) {
+        this.organization = organization;
+    }
+
 }

@@ -1,11 +1,16 @@
 package com.Soldat.MWS.services.impl;
 
+import com.Soldat.MWS.entity.OrganizationEntity;
 import com.Soldat.MWS.entity.PersonEntity;
+import com.Soldat.MWS.entity.models.address_models.Address;
+import com.Soldat.MWS.entity.models.contact_models.Contact;
+import com.Soldat.MWS.entity.models.organization_models.Organization;
 import com.Soldat.MWS.exceptions.NotFoundException;
 import com.Soldat.MWS.exceptions.PersonAlreadyExistException;
 import com.Soldat.MWS.exceptions.PersonNotFoundException;
 import com.Soldat.MWS.repository.PersonRepo;
 import com.Soldat.MWS.services.PersonService;
+import com.Soldat.MWS.services.ServiceE;
 import com.Soldat.MWS.services.utils.Functions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -21,6 +26,8 @@ public class PersonServiceImpl implements PersonService {
 
     @Autowired
     private PersonRepo repo;
+    @Autowired
+    private ServiceE<OrganizationEntity> orgService;
 
     public PersonServiceImpl() {
     }
@@ -60,8 +67,29 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public PersonEntity edit(long entityId, long fieldId, Functions function) throws NotFoundException {
-        return null;
+    public PersonEntity edit(long id, PersonEntity entity) throws PersonNotFoundException {
+        PersonEntity person = this.getById(id);
+        if(entity.getFirstName()!=null)person.setFirstName(entity.getFirstName());
+        if(entity.getLastName()!=null)person.setLastName(entity.getLastName());
+        if(entity.getSurname()!=null) person.setSurname(entity.getSurname());
+        if(entity.getPosition()!=null)person.setPosition((entity.getPosition()));
+        //address
+        //contacts
+        if(entity.getOrganization()!=null)person.setOrganization(entity.getOrganization());
+        return repo.save(person);
+    }
+
+    @Override
+    public PersonEntity binding(long entityId, long linkId, Functions function) throws NotFoundException {
+        PersonEntity person = this.getById(entityId);
+        switch (function){
+            case ADD_ORGANIZATION:{
+                OrganizationEntity org = orgService.getById(linkId);
+                person.setOrganization(org);
+                break;
+            }
+        }
+        return repo.save(person);
     }
 
 }

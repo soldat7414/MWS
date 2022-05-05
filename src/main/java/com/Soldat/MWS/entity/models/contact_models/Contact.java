@@ -1,9 +1,8 @@
-package com.Soldat.MWS.entity.models;
+package com.Soldat.MWS.entity.models.contact_models;
 
 
 import com.Soldat.MWS.entity.ContactEntity;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
