@@ -25,6 +25,9 @@ public class AddressEntity {
     @OneToOne
     @PrimaryKeyJoinColumn
     private OrganizationEntity organization;
+    @OneToOne
+    @PrimaryKeyJoinColumn
+    private ObjectEntity object;
 
 
 
@@ -128,4 +131,11 @@ public class AddressEntity {
         this.organization = organization;
     }
 
+    public ObjectEntity getObject() {
+        return object;
+    }
+
+    public void setObject(ObjectEntity object) {
+        this.object = object;
+    }
 }

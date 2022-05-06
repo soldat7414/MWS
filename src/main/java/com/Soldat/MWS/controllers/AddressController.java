@@ -51,12 +51,12 @@ public class AddressController {
                                   @RequestParam String function) {
         try {
             return ResponseEntity.ok(service.binding(idAddr, idPers, Functions.valueOf(function)).toModel());
-        } catch (NotFoundException ex) {
+        } catch (NotFoundException | IllegalArgumentException ex) {
             return ResponseEntity.badRequest().body(ex.getMessage());
         }
     }
 
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     public ResponseEntity edit(@RequestBody AddressEntity entity,
                                @PathVariable long id) {
         try {

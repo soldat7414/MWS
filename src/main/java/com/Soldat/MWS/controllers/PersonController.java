@@ -60,12 +60,12 @@ public class PersonController {
                                   @RequestParam String function) {
         try {
             return ResponseEntity.ok(service.binding(idPers, idOrg, Functions.valueOf(function)).toModel());
-        } catch (NotFoundException ex) {
+        } catch (NotFoundException | IllegalArgumentException ex) {
             return ResponseEntity.badRequest().body(ex.getMessage());
         }
     }
 
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     public ResponseEntity edit(@RequestBody PersonEntity entity,
                                @PathVariable long id){
         try {

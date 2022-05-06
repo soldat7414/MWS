@@ -1,6 +1,7 @@
 package com.Soldat.MWS.services.impl;
 
 import com.Soldat.MWS.entity.AddressEntity;
+import com.Soldat.MWS.entity.ObjectEntity;
 import com.Soldat.MWS.entity.OrganizationEntity;
 import com.Soldat.MWS.entity.PersonEntity;
 import com.Soldat.MWS.entity.models.address_models.Address;
@@ -30,6 +31,8 @@ public class AddressServiceImpl implements AddressService {
     private ServiceE<PersonEntity> personService;
     @Autowired
     private ServiceE<OrganizationEntity> orgService;
+    @Autowired
+    private ServiceE<ObjectEntity> objService;
 
     private long containSameInDB (AddressEntity address){
         Optional<AddressEntity> result = repo.findByCountryAndRegionAndDistrictAndLocalityAndStreetAndBuilding(
@@ -90,6 +93,11 @@ public class AddressServiceImpl implements AddressService {
             case ADD_ORGANIZATION:{
                 OrganizationEntity org = orgService.getById(linkId);
                 address.setOrganization(org);
+                return repo.save(address);
+            }
+            case ADD_OBJECT:{
+                ObjectEntity obj = objService.getById(linkId);
+                address.setObject(obj);
                 return repo.save(address);
             }
         }

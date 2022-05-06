@@ -20,14 +20,16 @@ public class OrganizationEntity {
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "organization")
     private List<PersonEntity> employees;
 
-    //objects what building this organization
-    // TODO: 04.05.2022
+    //in case if this organization is builder
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "builder")
+    private List<ObjectEntity> objectBuilder;
 
     //documents like the contract, license, permissions
     // TODO: 04.05.2022
 
-    //the object customer in case if this organization is customer
-    // TODO: 04.05.2022
+    //in case if this organization is customer
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "customer")
+    private List<ObjectEntity> objectCustomer;
 
     //from what organization the letter
     // TODO: 04.05.2022
@@ -100,5 +102,21 @@ public class OrganizationEntity {
 
     public void setContacts(List<ContactEntity> contacts) {
         this.contacts = contacts;
+    }
+
+    public List<ObjectEntity> getObjectBuilder() {
+        return objectBuilder;
+    }
+
+    public void setObjectBuilder(List<ObjectEntity> objectBuilder) {
+        this.objectBuilder = objectBuilder;
+    }
+
+    public List<ObjectEntity> getObjectCustomer() {
+        return objectCustomer;
+    }
+
+    public void setObjectCustomer(List<ObjectEntity> objectCustomer) {
+        this.objectCustomer = objectCustomer;
     }
 }

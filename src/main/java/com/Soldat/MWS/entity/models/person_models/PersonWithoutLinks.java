@@ -14,8 +14,8 @@ public class PersonWithoutLinks extends Person {
     private String lastName;
     private String surname;
     private String position;
-    private Address address;
-    private List<Contact> contacts;
+//    private Address address;
+//    private List<Contact> contacts;
 
     //to model
     //@Override
@@ -26,9 +26,9 @@ public class PersonWithoutLinks extends Person {
         person.setLastName(personEntity.getLastName());
         person.setSurname(personEntity.getSurname());
         person.setPosition(personEntity.getPosition());
-        if(personEntity.getAddress()!=null)person.setAddress(personEntity.getAddress().toModel());
-        if(personEntity.getPhoneNumbers()!=null)person.setContacts(personEntity.getPhoneNumbers().stream()
-                .map(Contact::toModel).collect(Collectors.toList()));
+//        if(personEntity.getAddress()!=null)person.setAddress(personEntity.getAddress().toModel());
+//        if(personEntity.getPhoneNumbers()!=null)person.setContacts(personEntity.getPhoneNumbers().stream()
+//                .map(Contact::toModel).collect(Collectors.toList()));
         return person;
     }
 
@@ -41,13 +41,13 @@ public class PersonWithoutLinks extends Person {
     }
     //getters and setters
 
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
+//    public Address getAddress() {
+//        return address;
+//    }
+//
+//    public void setAddress(Address address) {
+//        this.address = address;
+//    }
 
     public long getId() {
         return id;
@@ -89,11 +89,11 @@ public class PersonWithoutLinks extends Person {
         this.position = position;
     }
 
-    public List<Contact> getContacts() {
-        return contacts;
-    }
-
-    public void setContacts(List<Contact> contacts) {
-        this.contacts = contacts;
-    }
+//    public List<Contact> getContacts() {
+//        return contacts;
+//    }
+//
+//    public void setContacts(List<Contact> contacts) {
+//        this.contacts = contacts;
+//    }
 }

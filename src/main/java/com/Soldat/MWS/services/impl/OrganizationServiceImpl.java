@@ -1,13 +1,18 @@
 package com.Soldat.MWS.services.impl;
 
+import com.Soldat.MWS.entity.ContactEntity;
+import com.Soldat.MWS.entity.ObjectEntity;
 import com.Soldat.MWS.entity.OrganizationEntity;
+import com.Soldat.MWS.entity.PersonEntity;
 import com.Soldat.MWS.entity.models.organization_models.Organization;
 import com.Soldat.MWS.exceptions.AlreadyExistException;
 import com.Soldat.MWS.exceptions.NotFoundException;
 import com.Soldat.MWS.exceptions.OrganizationAlreadyExistException;
 import com.Soldat.MWS.exceptions.OrganizationNotFoundException;
+import com.Soldat.MWS.repository.ObjectRepo;
 import com.Soldat.MWS.repository.OrganizationRepo;
 import com.Soldat.MWS.services.OrganizationService;
+import com.Soldat.MWS.services.ServiceE;
 import com.Soldat.MWS.services.utils.Functions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -26,6 +31,8 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     @Autowired
     private OrganizationRepo repo;
+    @Autowired
+    private ServiceE<ObjectEntity> objService;
 
     @Override
     public OrganizationEntity add(OrganizationEntity entity) throws OrganizationAlreadyExistException {
@@ -58,7 +65,8 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
-    public OrganizationEntity binding(long entityId, long fieldId, Functions function) throws NotFoundException {
+    public OrganizationEntity binding(long entityId, long linkId, Functions function) throws NotFoundException {
+
         return null;
     }
 

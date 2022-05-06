@@ -30,6 +30,13 @@ public class PersonEntity {
     @ManyToOne
     @PrimaryKeyJoinColumn
     private OrganizationEntity organization;
+    //in case if person is technical supervisor
+    @OneToMany(cascade=CascadeType.ALL, mappedBy="techSupervisor")
+    private List<ObjectEntity> objectsTechSup = new ArrayList<>();
+    //in case if person is author supervisor
+    @OneToMany(cascade=CascadeType.ALL, mappedBy="AuthSupervisor")
+    private List<ObjectEntity> objectAuthSup = new ArrayList<>();
+
 
     //constructors
     public PersonEntity() {
@@ -123,5 +130,21 @@ public class PersonEntity {
 
     public void setOrganization(OrganizationEntity organization) {
         this.organization = organization;
+    }
+
+    public List<ObjectEntity> getObjectsTechSup() {
+        return objectsTechSup;
+    }
+
+    public void setObjectsTechSup(List<ObjectEntity> objectsTechSup) {
+        this.objectsTechSup = objectsTechSup;
+    }
+
+    public List<ObjectEntity> getObjectAuthSup() {
+        return objectAuthSup;
+    }
+
+    public void setObjectAuthSup(List<ObjectEntity> objectAuthSup) {
+        this.objectAuthSup = objectAuthSup;
     }
 }

@@ -61,12 +61,12 @@ public class OrganizationController {
                                   @RequestParam Functions function) {
         try {
             return ResponseEntity.ok(service.binding(idPers, idOrg, function).toModel());
-        } catch (NotFoundException ex) {
+        } catch (NotFoundException | IllegalArgumentException ex) {
             return ResponseEntity.badRequest().body(ex.getMessage());
         }
     }
 
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     public ResponseEntity edit(@RequestBody OrganizationEntity entity,
                                @PathVariable long id){
         try {
