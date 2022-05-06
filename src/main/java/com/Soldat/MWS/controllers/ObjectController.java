@@ -58,7 +58,7 @@ public class ObjectController {
                                   @RequestParam long linkId,
                                   @RequestParam String function) {
         try {
-            return ResponseEntity.ok(service.binding(objId, linkId, Functions.valueOf(function)).toModel());
+            return ResponseEntity.ok(service.binding(objId, linkId, Functions.valueOf(function.toUpperCase())).toModel());
         } catch (NotFoundException | IllegalArgumentException ex) {
             return ResponseEntity.badRequest().body(ex.getMessage());
         }

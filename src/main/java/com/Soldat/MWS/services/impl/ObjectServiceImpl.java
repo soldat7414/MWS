@@ -84,6 +84,7 @@ public class ObjectServiceImpl implements ObjectService {
                 break;
             }
         }
+        obj.setLastChange(new Date());
         return repo.save(obj);
     }
 
