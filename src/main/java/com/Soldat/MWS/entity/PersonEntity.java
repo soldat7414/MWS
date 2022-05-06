@@ -34,7 +34,7 @@ public class PersonEntity {
     @OneToMany(cascade=CascadeType.ALL, mappedBy="techSupervisor")
     private List<ObjectEntity> objectsTechSup = new ArrayList<>();
     //in case if person is author supervisor
-    @OneToMany(cascade=CascadeType.ALL, mappedBy="AuthSupervisor")
+    @OneToMany(cascade=CascadeType.ALL, mappedBy="authorSupervisor")
     private List<ObjectEntity> objectAuthSup = new ArrayList<>();
 
 

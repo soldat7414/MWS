@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -90,6 +91,10 @@ public class ObjectServiceImpl implements ObjectService {
     public ObjectEntity edit(long id, ObjectEntity entity) throws ObjectNotFoundException {
         ObjectEntity obj = this.getById(id);
         if (entity.getTitle() != null) obj.setTitle(entity.getTitle());
+        if(entity.getBeginBuilding()!=null)obj.setBeginBuilding(entity.getBeginBuilding());
+        if(entity.getEndBuilding()!=null)obj.setEndBuilding(entity.getEndBuilding());
+       // if(entity.getAddObject()!=null)obj.setAddObject(entity.getAddObject());
+        obj.setLastChange(new Date());
         //employees
         //contacts
         //address

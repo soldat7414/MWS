@@ -3,6 +3,7 @@ package com.Soldat.MWS.entity;
 import com.Soldat.MWS.entity.models.object_models.Object;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -14,6 +15,10 @@ public class ObjectEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String title;
+    private Date beginBuilding;
+    private Date endBuilding;
+    private Date addObject;
+    private Date lastChange;
     //    private String project;
     //connections
     //address of object
@@ -31,7 +36,7 @@ public class ObjectEntity {
     @ManyToOne(cascade = CascadeType.PERSIST)
     private PersonEntity techSupervisor;
     //author supervision
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     private PersonEntity authorSupervisor;
 
     //contract and additional agreements
@@ -41,6 +46,7 @@ public class ObjectEntity {
 
     //constructors
     public ObjectEntity() {
+        addObject = new Date();
     }
 
     //toModel
@@ -104,5 +110,37 @@ public class ObjectEntity {
 
     public void setAuthorSupervisor(PersonEntity authorSupervisor) {
         this.authorSupervisor = authorSupervisor;
+    }
+
+    public Date getBeginBuilding() {
+        return beginBuilding;
+    }
+
+    public void setBeginBuilding(Date beginBuilding) {
+        this.beginBuilding = beginBuilding;
+    }
+
+    public Date getEndBuilding() {
+        return endBuilding;
+    }
+
+    public void setEndBuilding(Date endBuilding) {
+        this.endBuilding = endBuilding;
+    }
+
+    public Date getAddObject() {
+        return addObject;
+    }
+//
+//    public void setAddObject(Date addObject) {
+//        this.addObject = addObject;
+//    }
+
+    public Date getLastChange() {
+        return lastChange;
+    }
+
+    public void setLastChange(Date lastChange) {
+        this.lastChange = lastChange;
     }
 }

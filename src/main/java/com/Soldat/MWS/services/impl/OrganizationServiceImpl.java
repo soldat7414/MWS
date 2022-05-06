@@ -31,8 +31,7 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     @Autowired
     private OrganizationRepo repo;
-    @Autowired
-    private ServiceE<ObjectEntity> objService;
+
 
     @Override
     public OrganizationEntity add(OrganizationEntity entity) throws OrganizationAlreadyExistException {
