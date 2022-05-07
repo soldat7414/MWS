@@ -1,8 +1,8 @@
-package com.Soldat.MWS.controllers;
+package com.Soldat.MWS.controllers.entity_controllers;
 
-import com.Soldat.MWS.entity.OrganizationEntity;
+import com.Soldat.MWS.entity.FileEntity;
 import com.Soldat.MWS.entity.PersonEntity;
-import com.Soldat.MWS.entity.models.organization_models.Organization;
+import com.Soldat.MWS.entity.models.file_models.File;
 import com.Soldat.MWS.entity.models.person_models.Person;
 import com.Soldat.MWS.exceptions.AlreadyExistException;
 import com.Soldat.MWS.exceptions.NotFoundException;
@@ -13,16 +13,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/organization")
-public class OrganizationController {
+@RequestMapping("/file")
+public class FileController {
 
     @Autowired
-    ServiceE<OrganizationEntity> service;
+    ServiceE<FileEntity> service;
 
     @GetMapping
     public ResponseEntity getAll() {
         try {
-            return ResponseEntity.ok(Organization.toModelList(service.getAll()));
+            return ResponseEntity.ok(File.toModelList(service.getAll()));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.toString());
         }
@@ -38,9 +38,9 @@ public class OrganizationController {
     }
 
     @PostMapping
-    public ResponseEntity add(@RequestBody OrganizationEntity org) {
+    public ResponseEntity add(@RequestBody FileEntity file) {
         try {
-            return ResponseEntity.ok(service.add(org).toModel());
+            return ResponseEntity.ok(service.add(file).toModel());
         } catch (AlreadyExistException ex) {
             return ResponseEntity.badRequest().body(ex.getMessage() + ex.getId());
         }
@@ -58,16 +58,16 @@ public class OrganizationController {
     @PutMapping
     public ResponseEntity binding(@RequestParam long idPers,
                                   @RequestParam long idOrg,
-                                  @RequestParam Functions function) {
+                                  @RequestParam String function) {
         try {
-            return ResponseEntity.ok(service.binding(idPers, idOrg, function).toModel());
+            return ResponseEntity.ok(service.binding(idPers, idOrg, Functions.valueOf(function)).toModel());
         } catch (NotFoundException | IllegalArgumentException ex) {
             return ResponseEntity.badRequest().body(ex.getMessage());
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity edit(@RequestBody OrganizationEntity entity,
+    public ResponseEntity edit(@RequestBody FileEntity entity,
                                @PathVariable long id){
         try {
             return ResponseEntity.ok(service.edit(id, entity).toModel());

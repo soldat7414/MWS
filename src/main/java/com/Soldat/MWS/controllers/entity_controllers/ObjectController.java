@@ -1,8 +1,7 @@
-package com.Soldat.MWS.controllers;
+package com.Soldat.MWS.controllers.entity_controllers;
 
-import com.Soldat.MWS.entity.AddressEntity;
-import com.Soldat.MWS.entity.OrganizationEntity;
-import com.Soldat.MWS.entity.models.address_models.Address;
+import com.Soldat.MWS.entity.ObjectEntity;
+import com.Soldat.MWS.entity.models.object_models.Object;
 import com.Soldat.MWS.exceptions.AlreadyExistException;
 import com.Soldat.MWS.exceptions.NotFoundException;
 import com.Soldat.MWS.services.ServiceE;
@@ -12,27 +11,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/address")
-public class AddressController {
+@RequestMapping("/object")
+public class ObjectController {
 
     @Autowired
-    ServiceE<AddressEntity> service;
+    ServiceE<ObjectEntity> service;
 
     @GetMapping
     public ResponseEntity getAll() {
         try {
-            return ResponseEntity.ok(Address.toModelList(service.getAll()));
-        } catch (Exception ex) {
-            return ResponseEntity.badRequest().body(ex.getMessage());
-        }
-    }
-
-    @PostMapping
-    public ResponseEntity add(@RequestBody AddressEntity address) {
-        try {
-            return ResponseEntity.ok(service.add(address).toModel());
-        } catch (AlreadyExistException ex) {
-            return ResponseEntity.badRequest().body(ex.getMessage() + ex.getId());
+            return ResponseEntity.ok(Object.toModelList(service.getAll()));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.toString());
         }
     }
 
@@ -45,24 +35,12 @@ public class AddressController {
         }
     }
 
-    @PutMapping
-    public ResponseEntity binding(@RequestParam long idAddr,
-                                  @RequestParam long idPers,
-                                  @RequestParam String function) {
+    @PostMapping
+    public ResponseEntity add(@RequestBody ObjectEntity object) {
         try {
-            return ResponseEntity.ok(service.binding(idAddr, idPers, Functions.valueOf(function)).toModel());
-        } catch (NotFoundException | IllegalArgumentException ex) {
-            return ResponseEntity.badRequest().body(ex.getMessage());
-        }
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity edit(@RequestBody AddressEntity entity,
-                               @PathVariable long id) {
-        try {
-            return ResponseEntity.ok(service.edit(id, entity).toModel());
-        } catch (NotFoundException ex) {
-            return ResponseEntity.badRequest().body(ex.getMessage());
+            return ResponseEntity.ok(service.add(object).toModel());
+        } catch (AlreadyExistException ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage() + ex.getId());
         }
     }
 
@@ -70,6 +48,27 @@ public class AddressController {
     public ResponseEntity delete(@PathVariable long id) {
         try {
             return ResponseEntity.ok(service.delete(id));
+        } catch (NotFoundException ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }
+    }
+
+    @PutMapping
+    public ResponseEntity binding(@RequestParam long objId,
+                                  @RequestParam long linkId,
+                                  @RequestParam String function) {
+        try {
+            return ResponseEntity.ok(service.binding(objId, linkId, Functions.valueOf(function.toUpperCase())).toModel());
+        } catch (NotFoundException | IllegalArgumentException ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity edit(@RequestBody ObjectEntity entity,
+                               @PathVariable long id){
+        try {
+            return ResponseEntity.ok(service.edit(id, entity).toModel());
         } catch (NotFoundException ex) {
             return ResponseEntity.badRequest().body(ex.getMessage());
         }

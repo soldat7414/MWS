@@ -45,6 +45,10 @@ public class OrganizationEntity {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "organization")
     private List<ContactEntity> contacts;
 
+    //Licenses and permissions
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "organization")
+    private List<DocumentEntity> licenses;
+
     //constructors
     public OrganizationEntity() {
     }
@@ -118,5 +122,13 @@ public class OrganizationEntity {
 
     public void setObjectCustomer(List<ObjectEntity> objectCustomer) {
         this.objectCustomer = objectCustomer;
+    }
+
+    public List<DocumentEntity> getLicenses() {
+        return licenses;
+    }
+
+    public void setLicenses(List<DocumentEntity> licenses) {
+        this.licenses = licenses;
     }
 }

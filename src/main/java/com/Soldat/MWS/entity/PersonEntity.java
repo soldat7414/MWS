@@ -22,47 +22,38 @@ public class PersonEntity {
     //connection
     //address of person
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "person")
-    private AddressEntity address = new AddressEntity();
+    private AddressEntity address;
+
     //phone numbers
     @OneToMany(cascade=CascadeType.ALL, mappedBy="person")
-    private List<ContactEntity> phoneNumbers = new ArrayList<>();
+    private List<ContactEntity> phoneNumbers;
+
     //organization, where person works
     @ManyToOne
     @PrimaryKeyJoinColumn
     private OrganizationEntity organization;
+
     //in case if person is technical supervisor
     @OneToMany(cascade=CascadeType.ALL, mappedBy="techSupervisor")
-    private List<ObjectEntity> objectsTechSup = new ArrayList<>();
+    private List<ObjectEntity> objectsTechSup;
+
     //in case if person is author supervisor
     @OneToMany(cascade=CascadeType.ALL, mappedBy="authorSupervisor")
-    private List<ObjectEntity> objectAuthSup = new ArrayList<>();
+    private List<ObjectEntity> objectAuthSup;
 
+    //Licenses and permissions
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "person")
+    private List<DocumentEntity> permissions;
 
     //constructors
     public PersonEntity() {
     }
 
-    public PersonEntity(String firstName, String lastName, String surname, String position, String email) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.surname = surname;
-        this.position = position;
-    }
-
-    //equals method for DocumentEntity
-
-    @Override
-    public String toString() {
-        return "PersonEntity{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", surname='" + surname + '\'' +
-                '}';
-    }
-
+    //toModel
     public Person toModel(){
         return Person.toModel(this);
     }
+
 
 
 
@@ -146,5 +137,13 @@ public class PersonEntity {
 
     public void setObjectAuthSup(List<ObjectEntity> objectAuthSup) {
         this.objectAuthSup = objectAuthSup;
+    }
+
+    public List<DocumentEntity> getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(List<DocumentEntity> permissions) {
+        this.permissions = permissions;
     }
 }

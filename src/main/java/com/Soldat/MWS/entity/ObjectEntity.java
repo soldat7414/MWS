@@ -24,23 +24,30 @@ public class ObjectEntity {
     //address of object
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "object")
     private AddressEntity address;
+
     //customer of object
     @ManyToOne
     @PrimaryKeyJoinColumn
     private OrganizationEntity customer;
+
     //builder of object
     @ManyToOne
     @PrimaryKeyJoinColumn
     private OrganizationEntity builder;
+
     //technical supervision
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     private PersonEntity techSupervisor;
+
     //author supervision
     @ManyToOne(cascade = CascadeType.ALL)
     private PersonEntity authorSupervisor;
 
     //contract and additional agreements
-// TODO: 05.05.2022
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "object")
+    private List<DocumentEntity> documents;
+
+
     //correspondence about the object
 // TODO: 05.05.2022
 
