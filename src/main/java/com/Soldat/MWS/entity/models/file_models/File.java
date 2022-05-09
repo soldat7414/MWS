@@ -13,7 +13,7 @@ public class File {
     private Date addDate;
     private Date lastChange;
     private String fileType;
-    private java.io.File item;
+    private String item;
     private DocumentEntity document;
 
     //toModel
@@ -23,7 +23,10 @@ public class File {
         file.setAddDate(entity.getAddDate());
         file.setLastChange(entity.getLastChange());
         if(entity.getFileType()!=null)file.setFileType(entity.getFileType());
-        return file;
+        if(entity.getTitle()!=null)file.setTitle(entity.getTitle());
+        if(entity.getFileType()!=null)file.setFileType(entity.getFileType());
+        if(entity.getItem()!=null)file.setItem(entity.getItem());
+            return file;
     }
 
     public static List<File> toModelList (List<FileEntity> files){
@@ -73,11 +76,11 @@ public class File {
         this.fileType = fileType;
     }
 
-    public java.io.File getItem() {
+    public String getItem() {
         return item;
     }
 
-    public void setItem(java.io.File item) {
+    public void setItem(String item) {
         this.item = item;
     }
 

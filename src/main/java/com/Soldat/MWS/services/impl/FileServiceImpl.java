@@ -36,6 +36,7 @@ public class FileServiceImpl implements FileService {
         if (entity.isPresent()) throw new FileAlreadyExistException(
                 "Такий файл вже записано до бази даних.", entity.get().getId());
         file.setLastChange(new Date());
+        System.out.println(file);
         return repo.save(file);
     }
 
@@ -48,9 +49,9 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public List<FileEntity> getAll() {
-        Iterable<FileEntity> people = repo.findAll();
+        Iterable<FileEntity> files = repo.findAll();
         List<FileEntity> all = new ArrayList<>();
-        people.forEach(all::add);
+        files.forEach(all::add);
         return all;
     }
 

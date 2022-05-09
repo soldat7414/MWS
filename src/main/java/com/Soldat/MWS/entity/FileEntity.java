@@ -1,7 +1,6 @@
 package com.Soldat.MWS.entity;
 
 import javax.persistence.*;
-import java.io.File;
 import java.util.Date;
 
 @Entity(name = "file")
@@ -13,7 +12,7 @@ public class FileEntity {
     private Date addDate;
     private Date lastChange;
     private String fileType;
-    private File item;
+    private String item;
 
     @ManyToOne
     @PrimaryKeyJoinColumn
@@ -25,6 +24,13 @@ public class FileEntity {
     }
 
     public FileEntity() {
+    }
+
+    public FileEntity(String title, Date addDate, String fileType, String item) {
+        this.title = title;
+        this.addDate = addDate;
+        this.fileType = fileType;
+        this.item = item;
     }
 
     public long getId() {
@@ -59,11 +65,11 @@ public class FileEntity {
         this.fileType = fileType;
     }
 
-    public File getItem() {
+    public String getItem() {
         return item;
     }
 
-    public void setItem(File item) {
+    public void setItem(String item) {
         this.item = item;
     }
 
@@ -81,5 +87,18 @@ public class FileEntity {
 
     public void setDocument(DocumentEntity document) {
         this.document = document;
+    }
+
+    @Override
+    public String toString() {
+        return "FileEntity{" +
+                "\nid=" + id +
+                "\n, title='" + title + '\'' +
+                "\n, addDate=" + addDate +
+                "\n, lastChange=" + lastChange +
+                "\n, fileType='" + fileType + '\'' +
+                "\n, item='" + item + '\'' +
+                "\n, document=" + document +
+                '}';
     }
 }
