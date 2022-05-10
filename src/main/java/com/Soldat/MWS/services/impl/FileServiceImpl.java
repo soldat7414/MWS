@@ -32,7 +32,7 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public FileEntity add(FileEntity file) throws FileAlreadyExistException {
-        Optional<FileEntity> entity = repo.findByTitleAndItem(file.getTitle(), file.getItem());
+        Optional<FileEntity> entity = repo.findByTitle(file.getTitle());
         if (entity.isPresent()) throw new FileAlreadyExistException(
                 "Такий файл вже записано до бази даних.", entity.get().getId());
         file.setLastChange(new Date());
@@ -43,6 +43,12 @@ public class FileServiceImpl implements FileService {
     @Override
     public FileEntity getById(long id) throws FileNotFoundException {
         Optional<FileEntity> file = repo.findById(id);
+        if (file.isPresent()) return file.get();
+        else throw new FileNotFoundException("Файл не знайдено.");
+    }
+
+    public FileEntity getByTitle(String title) throws FileNotFoundException {
+        Optional<FileEntity> file = repo.findByTitle(title);
         if (file.isPresent()) return file.get();
         else throw new FileNotFoundException("Файл не знайдено.");
     }
@@ -59,6 +65,11 @@ public class FileServiceImpl implements FileService {
     public long delete(long id) throws FileNotFoundException {
         repo.delete(this.getById(id));
         return id;
+    }
+    public long delete(String title) throws FileNotFoundException {
+        FileEntity entity = this.getByTitle(title);
+        repo.delete(entity);
+        return entity.getId();
     }
 
     @Override
