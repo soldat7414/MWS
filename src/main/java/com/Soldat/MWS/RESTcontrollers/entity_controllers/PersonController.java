@@ -1,6 +1,5 @@
-package com.Soldat.MWS.controllers.entity_controllers;
+package com.Soldat.MWS.RESTcontrollers.entity_controllers;
 
-import com.Soldat.MWS.entity.OrganizationEntity;
 import com.Soldat.MWS.entity.PersonEntity;
 import com.Soldat.MWS.entity.models.person_models.Person;
 import com.Soldat.MWS.exceptions.AlreadyExistException;
@@ -10,6 +9,8 @@ import com.Soldat.MWS.services.utils.Functions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
 @RequestMapping("/person")
@@ -30,7 +31,7 @@ public class PersonController {
     @GetMapping("/{id}")
     public ResponseEntity getById(@PathVariable long id) {
         try {
-            return ResponseEntity.ok(service.getById(id).toModel());
+            return ok(service.getById(id).toModel());
         } catch (NotFoundException ex) {
             return ResponseEntity.badRequest().body(ex.getMessage());
         }
@@ -39,7 +40,7 @@ public class PersonController {
     @PostMapping
     public ResponseEntity add(@RequestBody PersonEntity person) {
         try {
-            return ResponseEntity.ok(service.add(person).toModel());
+            return ok(service.add(person).toModel());
         } catch (AlreadyExistException ex) {
             return ResponseEntity.badRequest().body(ex.getMessage() + ex.getId());
         }
@@ -48,7 +49,7 @@ public class PersonController {
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable long id) {
         try {
-            return ResponseEntity.ok(service.delete(id));
+            return ok(service.delete(id));
         } catch (NotFoundException ex) {
             return ResponseEntity.badRequest().body(ex.getMessage());
         }
@@ -59,7 +60,7 @@ public class PersonController {
                                   @RequestParam long idOrg,
                                   @RequestParam String function) {
         try {
-            return ResponseEntity.ok(service.binding(idPers, idOrg, Functions.valueOf(function)).toModel());
+            return ok(service.binding(idPers, idOrg, Functions.valueOf(function)).toModel());
         } catch (NotFoundException | IllegalArgumentException ex) {
             return ResponseEntity.badRequest().body(ex.getMessage());
         }
@@ -69,7 +70,7 @@ public class PersonController {
     public ResponseEntity edit(@RequestBody PersonEntity entity,
                                @PathVariable long id){
         try {
-            return ResponseEntity.ok(service.edit(id, entity).toModel());
+            return ok(service.edit(id, entity).toModel());
         } catch (NotFoundException ex) {
             return ResponseEntity.badRequest().body(ex.getMessage());
         }

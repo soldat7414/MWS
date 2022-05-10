@@ -1,9 +1,7 @@
-package com.Soldat.MWS.controllers.entity_controllers;
+package com.Soldat.MWS.RESTcontrollers.entity_controllers;
 
 import com.Soldat.MWS.entity.OrganizationEntity;
-import com.Soldat.MWS.entity.PersonEntity;
 import com.Soldat.MWS.entity.models.organization_models.Organization;
-import com.Soldat.MWS.entity.models.person_models.Person;
 import com.Soldat.MWS.exceptions.AlreadyExistException;
 import com.Soldat.MWS.exceptions.NotFoundException;
 import com.Soldat.MWS.services.ServiceE;
