@@ -1,0 +1,45 @@
+<div th:fragment="addObject">
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addObject">
+        Додати об'єкт
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="addObject" tabindex="-1" aria-labelledby="addObjectLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addObjectLabel">Новий об'єкт</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form">
+                        <div class="form-row align-items-center">
+                            <div class="col-auto">
+                                <label class="sr-only" for="titleObj">Назва об'єкта</label>
+                                <input type="text" class="form-control mb-2" id="titleObj"
+                                       name="titleObj" placeholder="Назва компанії">
+                                <label for="beginBuilding">Початок будівництва</label>
+                                <input type="date" class="form-control mb-2" id="beginBuilding"
+                                       name="beginBuilding" placeholder="Початок будівництва">
+                                <label for="endBuilding">Стррок виконання робіт</label>
+                                <input type="date" class="form-control mb-2" id="endBuilding"
+                                       name="endBuilding" placeholder="Строк будівництва">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="reset" class="btn btn-secondary" data-dismiss="modal">Відмінити</button>
+                            <button type="button" name="send" data-bs-dismiss="modal" onclick="saveObject()"
+                                    class="btn btn-primary">Додати компанію
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

@@ -44,7 +44,7 @@ public class UpDownLoadService {
 
             uploadFile.transferTo(new File(uploadDir, resultFileName));
 
-            fileService.add(new FileEntity(resultFileName, new Date(), fileType, resultFileName));
+            fileService.add(new FileEntity(resultFileName, new Date(), fileType, uploadDir+resultFileName));
 
             return "File uploaded";
         }

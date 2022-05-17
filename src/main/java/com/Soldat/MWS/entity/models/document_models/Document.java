@@ -26,7 +26,7 @@ public class Document {
         doc.setLastChangeDate(entity.getLastChangeDate());
         if(entity.getDescription()!=null)doc.setDescription(entity.getDescription());
         if(entity.getItems()!=null)doc.setItems(File.toModelList(entity.getItems()));
-        return null;
+        return doc;
     }
 
     public static List<Document> toModelList (List<DocumentEntity> docs){

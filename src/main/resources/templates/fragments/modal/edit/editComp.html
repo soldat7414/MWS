@@ -1,0 +1,44 @@
+<div th:fragment="addComp">
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Додати компанію
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Нова компанія</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form">
+                        <div class="form-row align-items-center">
+                            <div class="col-auto">
+                                <label class="sr-only" for="title">Назва компанії</label>
+                                <input type="text" class="form-control mb-2" id="title"
+                                       name="title" placeholder="Назва компанії">
+                            </div>
+                            <select class="form-select" aria-label="Сторона відносин" id="contrParty">
+                                <option selected>Open this select menu</option>
+                                <option value="Builder">Підрядник</option>
+                                <option value="Customer">Замовник</option>
+                                <option value="Other">Інше</option>
+                            </select>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="reset" class="btn btn-secondary" data-dismiss="modal">Відмінити</button>
+                            <button type="button" name="send" data-bs-dismiss="modal" onclick="saveOrg()"
+                                    class="btn btn-primary">Додати компанію</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

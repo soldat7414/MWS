@@ -3,10 +3,8 @@ package com.Soldat.MWS.entity;
 import com.Soldat.MWS.entity.models.document_models.Document;
 
 import javax.persistence.*;
-import java.io.File;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 
 @Entity(name = "document")
@@ -132,5 +130,6 @@ public class DocumentEntity {
     public void setObject(ObjectEntity object) {
         this.object = object;
     }
+
 }
 

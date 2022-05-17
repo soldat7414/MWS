@@ -34,7 +34,7 @@ public class DocementServiceImpl implements DocumentService {
     ServiceE<ObjectEntity> objService;
 
     private long containSameInDB(DocumentEntity doc) {
-        Optional<DocumentEntity> result = repo.findByTitleAndAndDescriptionAndAndDocType(doc.getTitle(),
+        Optional<DocumentEntity> result = repo.findByTitleAndDescriptionAndDocType(doc.getTitle(),
                 doc.getDescription(), doc.getDocType());
         return result.map(DocumentEntity::getId).orElse(-1L);
     }
