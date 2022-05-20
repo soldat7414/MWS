@@ -40,11 +40,11 @@ public class DocementServiceImpl implements DocumentService {
     }
 
     @Override
-    public DocumentEntity add(DocumentEntity doc) throws DocumentAlreadyExistException {
+    public long add(DocumentEntity doc) throws DocumentAlreadyExistException {
         long id = containSameInDB(doc);
         if (id > 0) throw new DocumentAlreadyExistException("Такий документ вже записаний до бази даних.", id);
         doc.setLastChangeDate(new Date());
-        return repo.save(doc);
+        return repo.save(doc).getId();
     }
 
     @Override

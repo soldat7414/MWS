@@ -1,5 +1,6 @@
 package com.Soldat.MWS.services.impl;
 
+import com.Soldat.MWS.entity.AddressEntity;
 import com.Soldat.MWS.entity.OrganizationEntity;
 import com.Soldat.MWS.entity.PersonEntity;
 import com.Soldat.MWS.entity.models.address_models.Address;
@@ -28,6 +29,8 @@ public class PersonServiceImpl implements PersonService {
     private PersonRepo repo;
     @Autowired
     private ServiceE<OrganizationEntity> orgService;
+    @Autowired
+    private ServiceE<AddressEntity> addressService;
 
     public PersonServiceImpl() {
     }
@@ -39,10 +42,10 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public PersonEntity add(PersonEntity person) throws PersonAlreadyExistException {
+    public long add(PersonEntity person) throws PersonAlreadyExistException {
         long id = containSameInDB(person);
         if (id > 0) throw new PersonAlreadyExistException("Така людина вже записана до бази даних.", id);
-        return repo.save(person);
+        return repo.save(person).getId();
     }
 
     @Override
@@ -86,6 +89,11 @@ public class PersonServiceImpl implements PersonService {
             case ADD_ORGANIZATION:{
                 OrganizationEntity org = orgService.getById(linkId);
                 person.setOrganization(org);
+                break;
+            }
+            case ADD_ADDRESS:{
+                AddressEntity addr = addressService.getById(linkId);
+                person.setAddress(addr);
                 break;
             }
         }

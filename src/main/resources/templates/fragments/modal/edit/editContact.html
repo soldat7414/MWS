@@ -1,0 +1,58 @@
+<div th:fragment="editContact">
+    <!-- Button trigger modal -->
+    <button type="button" class="position-absolute top-50 end-0 translate-middle btn btn-sm
+    btn-dark rounded-pill" style="width: 2rem; height:2rem;" data-bs-toggle="modal" data-bs-target="#editContact">
+        &#x270e
+    </button>
+
+    <!-- Modal -->
+
+    <div class="modal fade" id="editContact" tabindex="-1" aria-labelledby="editContactLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editObjectLabel"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <ul id="contactModal" style="color: rgba(231,181,122,0.99)">
+                        <!--                    <li id="contact"></li>-->
+                    </ul>
+                    <form id="form" name="editContactForm">
+                        <div class="form-row align-items-center">
+                            <div class="col-auto">
+                                <label for="contactId">Введіть id контакта</label>
+                                <input type="text" class="form-control mb-2" id="contactId"
+                                       name="contactId" placeholder="id контакта">
+
+                                <label class="sr-only" for="species">Виберіть форму зв'язку</label>
+                                <select class="form-select" aria-label="Область" name="species" id="species">
+                                    <option selected id="speciesEdit"></option>
+                                    <option selected>Телефон</option>
+                                    <option value="E-mail">E-mail</option>
+                                    <option value="Telegram">Telegram</option>
+                                    <option value="Skype">Skype</option>
+                                </select>
+
+                                <label for="contact">Введіть контакт</label>
+                                <input type="text" class="form-control mb-2" id="contactEdit"
+                                       name="contact" placeholder="+380 xx xx xx xxx">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="reset" class="btn btn-secondary" data-dismiss="modal">Відмінити</button>
+                            <button type="button" name="send" data-bs-dismiss="modal" onclick="editContact()"
+                                    class="btn btn-primary">Змінити контакт
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

@@ -40,7 +40,7 @@ public class OrganizationController {
     @PostMapping
     public ResponseEntity add(@RequestBody OrganizationEntity org) {
         try {
-            return ResponseEntity.ok(service.add(org).toModel());
+            return ResponseEntity.ok(service.add(org));
         } catch (AlreadyExistException ex) {
             return ResponseEntity.badRequest().body(ex.getMessage() + ex.getId());
         }
@@ -56,11 +56,11 @@ public class OrganizationController {
     }
 
     @PutMapping
-    public ResponseEntity binding(@RequestParam long idPers,
-                                  @RequestParam long idOrg,
+    public ResponseEntity binding(@RequestParam long entityId,
+                                  @RequestParam long linkId,
                                   @RequestParam Functions function) {
         try {
-            return ResponseEntity.ok(service.binding(idPers, idOrg, function).toModel());
+            return ResponseEntity.ok(service.binding(entityId, linkId, function).toModel());
         } catch (NotFoundException | IllegalArgumentException ex) {
             return ResponseEntity.badRequest().body(ex.getMessage());
         }

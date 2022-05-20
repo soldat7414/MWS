@@ -22,7 +22,8 @@ public class ObjectEntity {
     //    private String project;
     //connections
     //address of object
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "object")
+    @ManyToOne
+    @PrimaryKeyJoinColumn
     private AddressEntity address;
 
     //customer of object

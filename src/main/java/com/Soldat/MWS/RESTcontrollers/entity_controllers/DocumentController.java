@@ -40,7 +40,7 @@ public class DocumentController {
     @PostMapping
     public ResponseEntity add(@RequestBody DocumentEntity document) {
         try {
-            return ResponseEntity.ok(service.add(document).toModel());
+            return ResponseEntity.ok(service.add(document));
         } catch (AlreadyExistException ex) {
             return ResponseEntity.badRequest().body(ex.getMessage() + ex.getId());
         }

@@ -13,7 +13,7 @@ import java.util.List;
 public interface OrganizationService extends ServiceE<OrganizationEntity> {
 
     @Override
-    OrganizationEntity add(OrganizationEntity entity) throws OrganizationAlreadyExistException;
+    long add(OrganizationEntity entity) throws OrganizationAlreadyExistException;
 
     @Override
     OrganizationEntity getById(long id) throws OrganizationNotFoundException;

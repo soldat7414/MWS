@@ -27,12 +27,7 @@ public class AddressServiceImpl implements AddressService {
 
     @Autowired
     private AddressRepo repo;
-    @Autowired
-    private ServiceE<PersonEntity> personService;
-    @Autowired
-    private ServiceE<OrganizationEntity> orgService;
-    @Autowired
-    private ServiceE<ObjectEntity> objService;
+
 
     private long containSameInDB (AddressEntity address){
         Optional<AddressEntity> result = repo.findByCountryAndRegionAndDistrictAndLocalityAndStreetAndBuilding(
@@ -41,10 +36,10 @@ public class AddressServiceImpl implements AddressService {
         return result.map(AddressEntity::getId).orElse(-1L);
     }
 
-    public AddressEntity add (AddressEntity address) throws AddressAlreadyExistException {
+    public long add (AddressEntity address) throws AddressAlreadyExistException {
         long id = containSameInDB(address);
         if(id>0) throw new AddressAlreadyExistException("Таку адресу вже внесено в базу данихю", id);
-        return repo.save(address);
+        return repo.save(address).getId();
     }
 
     public AddressEntity getById (long id) throws AddressNotFoundException{
@@ -76,30 +71,30 @@ public class AddressServiceImpl implements AddressService {
         if(entity.getStreet()!=null)address.setStreet(entity.getStreet());
         if(entity.getBuilding()!=null)address.setBuilding(entity.getBuilding());
         if(entity.getCoordinates()!=null)address.setCoordinates(entity.getCoordinates());
-        if(entity.getOrganization()!=null)address.setOrganization(entity.getOrganization());
-        if(entity.getPerson()!=null)address.setPerson(entity.getPerson());
+        if(entity.getOrganizations()!=null)address.setOrganizations(entity.getOrganizations());
+        if(entity.getPersons()!=null)address.setPersons(entity.getPersons());
         return repo.save(address);
     }
 
     @Override
-    public AddressEntity binding(long entityId, long linkId, Functions function) throws NotFoundException {
-        AddressEntity address = this.getById(entityId);
+    public AddressEntity binding(long addrId, long linkId, Functions function) throws NotFoundException {
+        AddressEntity address = this.getById(addrId);
         switch (function){
-            case ADD_PERSON:{
-                PersonEntity person = personService.getById(linkId);
-                address.setPerson(person);
-                return repo.save(address);
-            }
-            case ADD_ORGANIZATION:{
-                OrganizationEntity org = orgService.getById(linkId);
-                address.setOrganization(org);
-                return repo.save(address);
-            }
-            case ADD_OBJECT:{
-                ObjectEntity obj = objService.getById(linkId);
-                address.setObject(obj);
-                return repo.save(address);
-            }
+//            case ADD_PERSON:{
+//                PersonEntity person = personService.getById(linkId);
+//                address.setPersons(person);
+//                return repo.save(address);
+//            }
+//            case ADD_ORGANIZATION:{
+//                OrganizationEntity org = orgService.getById(linkId);
+//                address.setOrganization(org);
+//                return repo.save(address);
+//            }
+//            case ADD_OBJECT:{
+//                ObjectEntity obj = objService.getById(linkId);
+//                address.setObject(obj);
+//                return repo.save(address);
+//            }
         }
         return null;
     }

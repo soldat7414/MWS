@@ -21,7 +21,8 @@ public class PersonEntity {
 
     //connection
     //address of person
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "person")
+    @ManyToOne
+    @PrimaryKeyJoinColumn
     private AddressEntity address;
 
     //phone numbers

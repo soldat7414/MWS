@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface PersonService extends ServiceE<PersonEntity> {
     @Override
-    PersonEntity add(PersonEntity entity) throws PersonAlreadyExistException;
+    long add(PersonEntity entity) throws PersonAlreadyExistException;
 
     @Override
     PersonEntity getById(long id) throws PersonNotFoundException;

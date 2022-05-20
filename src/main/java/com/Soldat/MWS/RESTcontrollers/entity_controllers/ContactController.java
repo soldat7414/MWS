@@ -4,7 +4,9 @@ import com.Soldat.MWS.entity.ContactEntity;
 import com.Soldat.MWS.entity.models.contact_models.Contact;
 import com.Soldat.MWS.exceptions.AlreadyExistException;
 import com.Soldat.MWS.exceptions.NotFoundException;
+import com.Soldat.MWS.services.ContactService;
 import com.Soldat.MWS.services.ServiceE;
+import com.Soldat.MWS.services.impl.ContactServiceImpl;
 import com.Soldat.MWS.services.utils.Functions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 public class ContactController {
 
     @Autowired
-    ServiceE<ContactEntity> service;
+    ContactServiceImpl service;
 
     @GetMapping
     public ResponseEntity getAll() {
@@ -25,11 +27,28 @@ public class ContactController {
             return ResponseEntity.badRequest().body(ex.getMessage());
         }
     }
+    @GetMapping("/org/{id}")
+    public ResponseEntity getByOrg(@PathVariable long id) {
+        try {
+            return ResponseEntity.ok(Contact.toModelList(service.getByOrganization(id)));
+        } catch (Exception ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }
+    }
+
+    @GetMapping("/pers/{id}")
+    public ResponseEntity getByPers(@PathVariable long id) {
+        try {
+            return ResponseEntity.ok(Contact.toModelList(service.getByPerson(id)));
+        } catch (Exception ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }
+    }
 
     @PostMapping
     public ResponseEntity add(@RequestBody ContactEntity contact) {
         try {
-            return ResponseEntity.ok(service.add(contact).toModel());
+            return ResponseEntity.ok(service.add(contact));
         } catch (AlreadyExistException ex) {
             return ResponseEntity.badRequest().body(ex.getMessage() + ex.getId());
         }
@@ -45,11 +64,11 @@ public class ContactController {
     }
 
     @PutMapping
-    public ResponseEntity binding(@RequestParam long idContact,
-                                  @RequestParam long idPers,
+    public ResponseEntity binding(@RequestParam long entityId,
+                                  @RequestParam long linkId,
                                   @RequestParam String function) {
         try {
-            return ResponseEntity.ok(service.binding(idContact, idPers, Functions.valueOf(function.toUpperCase())).toModel());
+            return ResponseEntity.ok(service.binding(entityId, linkId, Functions.valueOf(function.toUpperCase())).toModel());
         } catch (NotFoundException | IllegalArgumentException ex) {
             return ResponseEntity.badRequest().body(ex.getMessage());
         }

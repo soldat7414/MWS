@@ -11,7 +11,7 @@ import java.util.List;
 public interface DocumentService extends ServiceE<DocumentEntity> {
 
     @Override
-    DocumentEntity add(DocumentEntity entity) throws DocumentAlreadyExistException;
+    long add(DocumentEntity entity) throws DocumentAlreadyExistException;
 
     @Override
     DocumentEntity getById(long id) throws DocumentNotFoundException;

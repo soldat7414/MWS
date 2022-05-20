@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ServiceE<E> {
 
-    E add (E entity) throws AlreadyExistException;
+    long add (E entity) throws AlreadyExistException;
     E getById (long id) throws NotFoundException;
     List<E> getAll ();
     long delete (long id) throws NotFoundException;

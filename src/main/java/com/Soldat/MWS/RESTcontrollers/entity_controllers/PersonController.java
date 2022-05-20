@@ -40,7 +40,7 @@ public class PersonController {
     @PostMapping
     public ResponseEntity add(@RequestBody PersonEntity person) {
         try {
-            return ok(service.add(person).toModel());
+            return ok(service.add(person));
         } catch (AlreadyExistException ex) {
             return ResponseEntity.badRequest().body(ex.getMessage() + ex.getId());
         }
@@ -56,11 +56,11 @@ public class PersonController {
     }
 
     @PutMapping
-    public ResponseEntity binding(@RequestParam long idPers,
-                                  @RequestParam long idOrg,
+    public ResponseEntity binding(@RequestParam long entityId,
+                                  @RequestParam long linkId,
                                   @RequestParam String function) {
         try {
-            return ok(service.binding(idPers, idOrg, Functions.valueOf(function)).toModel());
+            return ok(service.binding(entityId, linkId, Functions.valueOf(function)).toModel());
         } catch (NotFoundException | IllegalArgumentException ex) {
             return ResponseEntity.badRequest().body(ex.getMessage());
         }

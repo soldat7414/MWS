@@ -13,7 +13,7 @@ import java.util.List;
 public interface AddressService extends ServiceE<AddressEntity> {
 
     @Override
-    AddressEntity add(AddressEntity entity) throws AddressAlreadyExistException;
+    long add(AddressEntity entity) throws AddressAlreadyExistException;
 
     @Override
     AddressEntity getById(long id) throws AddressNotFoundException;

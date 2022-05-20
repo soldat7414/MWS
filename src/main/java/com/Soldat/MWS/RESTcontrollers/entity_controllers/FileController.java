@@ -38,7 +38,7 @@ public class FileController {
     @PostMapping
     public ResponseEntity add(@RequestBody FileEntity file) {
         try {
-            return ResponseEntity.ok(service.add(file).toModel());
+            return ResponseEntity.ok(service.add(file));
         } catch (AlreadyExistException ex) {
             return ResponseEntity.badRequest().body(ex.getMessage() + ex.getId());
         }

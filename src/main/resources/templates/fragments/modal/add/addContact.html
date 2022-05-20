@@ -1,0 +1,46 @@
+<div th:fragment="addContact">
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#addContact">
+        Додати контакт
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="addContact" tabindex="-1" aria-labelledby="addContactLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addObjectLabel">Новий контакт</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form" name="addContactForm">
+                        <div class="form-row align-items-center">
+                            <div class="col-auto">
+                                <label class="sr-only" for="species">Виберіть форму зв'язку</label>
+                                <select class="form-select" aria-label="Область" name="species" id="species">
+                                    <option selected>Телефон</option>
+                                    <option value="E-mail">E-mail</option>
+                                    <option value="Telegram">Telegram</option>
+                                    <option value="Skype">Skype</option>
+                                </select>
+                                <label for="contact">Введіть контакт</label>
+                                <input type="text" class="form-control mb-2" id="contact"
+                                       name="contact" placeholder="+380 xx xx xx xxx">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="reset" class="btn btn-secondary" data-dismiss="modal">Відмінити</button>
+                            <button type="button" name="send" data-bs-dismiss="modal" onclick="addContact()"
+                                    class="btn btn-primary">Додати контакт
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

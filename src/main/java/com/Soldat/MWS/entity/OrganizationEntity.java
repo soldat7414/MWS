@@ -38,7 +38,8 @@ public class OrganizationEntity {
     // TODO: 04.05.2022
 
     //address of organization
-    @OneToOne(cascade = CascadeType.PERSIST, mappedBy = "organization")
+    @ManyToOne
+    @PrimaryKeyJoinColumn
     private AddressEntity address;
 
     //contacts of organization

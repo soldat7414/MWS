@@ -32,11 +32,11 @@ public class ContactServiceImpl implements ContactService {
     ServiceE<OrganizationEntity> orgService;
 
     @Override
-    public ContactEntity add(ContactEntity entity) throws ContactAlreadyExistException {
+    public long add(ContactEntity entity) throws ContactAlreadyExistException {
         Optional<ContactEntity> contact = repo.findByContact(entity.getContact());
         if(contact.isPresent()) throw new ContactAlreadyExistException(
                 "Такий контакт вже внесено до бази даних! ", contact.get().getId());
-        else return repo.save(entity);
+        else return repo.save(entity).getId();
     }
 
     @Override
@@ -44,6 +44,20 @@ public class ContactServiceImpl implements ContactService {
         Optional<ContactEntity> contact = repo.findById(id);
         if(contact.isPresent()) return contact.get();
         else throw new ContactNotFoundException("Такого контакту не знайдено.");
+    }
+
+    public List<ContactEntity> getByOrganization(long orgId) throws NotFoundException {
+        Iterable<ContactEntity> all = repo.findByOrganization(orgService.getById(orgId));
+        List<ContactEntity> contacts = new ArrayList<>();
+        all.forEach(contacts::add);
+        return contacts;
+    }
+
+    public List<ContactEntity> getByPerson(long persId) throws NotFoundException {
+        Iterable<ContactEntity> all = repo.findByPerson(personService.getById(persId));
+        List<ContactEntity> contacts = new ArrayList<>();
+        all.forEach(contacts::add);
+        return contacts;
     }
 
     @Override

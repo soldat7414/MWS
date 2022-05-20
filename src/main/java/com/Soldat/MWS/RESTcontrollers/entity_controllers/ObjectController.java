@@ -38,7 +38,7 @@ public class ObjectController {
     @PostMapping
     public ResponseEntity add(@RequestBody ObjectEntity object) {
         try {
-            return ResponseEntity.ok(service.add(object).toModel());
+            return ResponseEntity.ok(service.add(object));
         } catch (AlreadyExistException ex) {
             return ResponseEntity.badRequest().body(ex.getMessage() + ex.getId());
         }
@@ -54,11 +54,11 @@ public class ObjectController {
     }
 
     @PutMapping
-    public ResponseEntity binding(@RequestParam long objId,
+    public ResponseEntity binding(@RequestParam long entityId,
                                   @RequestParam long linkId,
                                   @RequestParam String function) {
         try {
-            return ResponseEntity.ok(service.binding(objId, linkId, Functions.valueOf(function.toUpperCase())).toModel());
+            return ResponseEntity.ok(service.binding(entityId, linkId, Functions.valueOf(function.toUpperCase())).toModel());
         } catch (NotFoundException | IllegalArgumentException ex) {
             return ResponseEntity.badRequest().body(ex.getMessage());
         }

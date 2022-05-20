@@ -1,9 +1,6 @@
 package com.Soldat.MWS.services.impl;
 
-import com.Soldat.MWS.entity.ContactEntity;
-import com.Soldat.MWS.entity.ObjectEntity;
-import com.Soldat.MWS.entity.OrganizationEntity;
-import com.Soldat.MWS.entity.PersonEntity;
+import com.Soldat.MWS.entity.*;
 import com.Soldat.MWS.entity.models.organization_models.Organization;
 import com.Soldat.MWS.exceptions.AlreadyExistException;
 import com.Soldat.MWS.exceptions.NotFoundException;
@@ -31,14 +28,16 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     @Autowired
     private OrganizationRepo repo;
+    @Autowired
+    private ServiceE<AddressEntity> addressService;
 
 
     @Override
-    public OrganizationEntity add(OrganizationEntity entity) throws OrganizationAlreadyExistException {
+    public long add(OrganizationEntity entity) throws OrganizationAlreadyExistException {
         Optional<OrganizationEntity> org = repo.findByTitle(entity.getTitle());
         if(org.isPresent()) throw new OrganizationAlreadyExistException(
                 "Організація з такою назвою вже внесена до бази даних.", org.get().getId());
-        else return repo.save(entity);
+        else return repo.save(entity).getId();
     }
 
     @Override
@@ -65,8 +64,15 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     @Override
     public OrganizationEntity binding(long entityId, long linkId, Functions function) throws NotFoundException {
-
-        return null;
+        OrganizationEntity org = this.getById(entityId);
+        switch (function){
+            case ADD_ADDRESS:{
+                AddressEntity addr = addressService.getById(linkId);
+                org.setAddress(addr);
+                break;
+            }
+        }
+        return repo.save(org);
     }
 
     @Override

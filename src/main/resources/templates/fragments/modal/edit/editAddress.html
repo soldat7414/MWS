@@ -1,0 +1,76 @@
+<div th:fragment="editAddress">
+
+    <!-- Button trigger modal -->
+    <button type="button" class="position-absolute top-50 end-0 translate-middle btn btn-sm
+    btn-dark rounded-pill" style="width: 2rem; height:2rem;" data-bs-toggle="modal" data-bs-target="#editAddress">
+        &#x270e
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="editAddress" tabindex="-1" aria-labelledby="editAddressModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editAddressModal" ></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editAddressForm" name="editAddressForm">
+                        <div class="form-row align-items-center">
+                            <div class="col-auto">
+                                <label class="sr-only" for="country">Страна</label>
+                                <input type="text" class="form-control mb-2" id="country"
+                                       name="country" placeholder="Страна">
+                            </div>
+
+                            <select class="form-select" aria-label="Область" name="region" id="region">
+                                <option selected>Оберіть область</option>
+                                <option value="Харківська обл.">Харківська обл.</option>
+                                <option value="Полтавська обл.">Полтавська обл.</option>
+                                <option value="Київська обл.">Київська обл.</option>
+                                <option value="Сумська обл.">Сумська обл.</option>
+                                <option value="Одеська обл.">Одеська обл.</option>
+                            </select>
+
+                            <div class="col-auto">
+                                <label class="sr-only" for="district">Район</label>
+                                <input type="text" class="form-control mb-2" id="district"
+                                       name="district" placeholder="Район">
+                            </div>
+
+                            <div class="col-auto">
+                                <label class="sr-only" for="locality">Населений пункт</label>
+                                <input type="text" class="form-control mb-2" id="locality"
+                                       name="locality" placeholder="Населений пункт">
+                            </div>
+
+                            <div class="col-auto">
+                                <label class="sr-only" for="street">Вулиця</label>
+                                <input type="text" class="form-control mb-2" id="street"
+                                       name="street" placeholder="Вулиця">
+                            </div>
+
+                            <div class="col-auto">
+                                <label class="sr-only" for="building">Дом</label>
+                                <input type="text" class="form-control mb-2" id="building"
+                                       name="building" placeholder="Дом">
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="reset" class="btn btn-secondary" data-dismiss="modal">Відмінити</button>
+                            <button type="button" name="send" data-bs-dismiss="modal" onclick="editAddress()"
+                                    class="btn btn-primary">Зберегти зміни
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

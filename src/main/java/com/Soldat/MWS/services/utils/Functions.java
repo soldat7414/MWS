@@ -8,6 +8,7 @@ public enum Functions {
     ADD_BUILDER,
     ADD_TECH_SUP,
     ADD_AUTH_SUP,
-    ADD_DOCUMENT
+    ADD_DOCUMENT,
+    ADD_ADDRESS
 
 }

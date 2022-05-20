@@ -3,6 +3,7 @@ package com.Soldat.MWS.entity;
 import com.Soldat.MWS.entity.models.address_models.Address;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity(name = "address")
 public class AddressEntity {
@@ -19,15 +20,14 @@ public class AddressEntity {
     private String coordinates;
     //connections
     //address of person
-    @OneToOne
-    @PrimaryKeyJoinColumn
-    private PersonEntity person;
-    @OneToOne
-    @PrimaryKeyJoinColumn
-    private OrganizationEntity organization;
-    @OneToOne
-    @PrimaryKeyJoinColumn
-    private ObjectEntity object;
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "address")
+    private List<PersonEntity> persons;
+
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "address")
+    private List<OrganizationEntity> organizations;
+
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "address")
+    private List<ObjectEntity> objects;
 
 
 
@@ -115,27 +115,27 @@ public class AddressEntity {
         this.coordinates = coordinates;
     }
 
-    public PersonEntity getPerson() {
-        return person;
+    public List<PersonEntity> getPersons() {
+        return persons;
     }
 
-    public void setPerson(PersonEntity person) {
-        this.person = person;
+    public void setPersons(List<PersonEntity> persons) {
+        this.persons = persons;
     }
 
-    public OrganizationEntity getOrganization() {
-        return organization;
+    public List<OrganizationEntity> getOrganizations() {
+        return organizations;
     }
 
-    public void setOrganization(OrganizationEntity organization) {
-        this.organization = organization;
+    public void setOrganizations(List<OrganizationEntity> organizations) {
+        this.organizations = organizations;
     }
 
-    public ObjectEntity getObject() {
-        return object;
+    public List<ObjectEntity> getObjects() {
+        return objects;
     }
 
-    public void setObject(ObjectEntity object) {
-        this.object = object;
+    public void setObjects(List<ObjectEntity> objects) {
+        this.objects = objects;
     }
 }

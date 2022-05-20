@@ -29,7 +29,7 @@ public class AddressController {
     @PostMapping
     public ResponseEntity add(@RequestBody AddressEntity address) {
         try {
-            return ResponseEntity.ok(service.add(address).toModel());
+            return ResponseEntity.ok(service.add(address));
         } catch (AlreadyExistException ex) {
             return ResponseEntity.badRequest().body(ex.getMessage() + ex.getId());
         }
@@ -45,11 +45,11 @@ public class AddressController {
     }
 
     @PutMapping
-    public ResponseEntity binding(@RequestParam long idAddr,
-                                  @RequestParam long idPers,
+    public ResponseEntity binding(@RequestParam long addrId,
+                                  @RequestParam long linkId,
                                   @RequestParam String function) {
         try {
-            return ResponseEntity.ok(service.binding(idAddr, idPers, Functions.valueOf(function)).toModel());
+            return ResponseEntity.ok(service.binding(addrId, linkId, Functions.valueOf(function)).toModel());
         } catch (NotFoundException | IllegalArgumentException ex) {
             return ResponseEntity.badRequest().body(ex.getMessage());
         }

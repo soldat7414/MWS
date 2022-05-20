@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface FileService extends ServiceE<FileEntity> {
     @Override
-    FileEntity add(FileEntity entity) throws FileAlreadyExistException;
+    long add(FileEntity entity) throws FileAlreadyExistException;
 
     @Override
     FileEntity getById(long id) throws FileNotFoundException;
