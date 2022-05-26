@@ -1,5 +1,6 @@
 package com.Soldat.MWS.services;
 
+import com.Soldat.MWS.entity.DocumentEntity;
 import com.Soldat.MWS.entity.FileEntity;
 import com.Soldat.MWS.exceptions.AlreadyExistException;
 import com.Soldat.MWS.exceptions.FileAlreadyExistException;
@@ -18,6 +19,9 @@ public interface FileService extends ServiceE<FileEntity> {
 
     @Override
     List<FileEntity> getAll();
+
+    List<FileEntity> getBy(long entityId, Functions function) throws NotFoundException;
+
 
     @Override
     long delete(long id) throws FileNotFoundException;

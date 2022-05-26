@@ -1,16 +1,16 @@
-<div th:fragment="addDocument">
+<div th:fragment="editDocument">
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal"
-            data-bs-target="#addDocument">
-        Додати документ
+    <button type="button" class="position-absolute top-50 end-0 translate-middle btn btn-sm
+    btn-outline-warning rounded-pill" style="width: 2rem; height:2rem;" data-bs-toggle="modal" data-bs-target="#editAddress">
+        &#9999
     </button>
 
     <!-- Modal -->
-    <div class="modal fade" id="addDocument" tabindex="-1" aria-labelledby="addDocumentLabel" aria-hidden="true">
+    <div class="modal fade" id="editDocument" tabindex="-1" aria-labelledby="editDocumentLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addDocumentLabel">Новий документ</h5>
+                    <h5 class="modal-title" id="editDocumentLabel">Змінити документ</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -26,13 +26,13 @@
                                     <option value="Інше">Інше</option>
                                 </select>
 
-                                <label class="sr-only" for="titleDoc">Назва документа</label>
-                                <input type="text" class="form-control mb-2" id="titleDoc"
-                                       name="titleDoc" placeholder="Назва документа">
+                                <label class="sr-only" for="EditTitleDoc">Назва документа</label>
+                                <input type="text" class="form-control mb-2" id="EditTitleDoc"
+                                       name="EditTitleDoc" placeholder="Назва документа">
 
-                                <label class="sr-only" for="descriptionDoc">Пояснення</label>
-                                <input type="text" class="form-control mb-2" id="descriptionDoc"
-                                       name="descriptionDoc" placeholder="Пояснення">
+                                <label class="sr-only" for="editDescriptionDoc">Пояснення</label>
+                                <input type="text" class="form-control mb-2" id="editDescriptionDoc"
+                                       name="editDescriptionDoc" placeholder="Пояснення">
 
 <!--                                <hr style="color: darkorange;" />-->
 <!--                                <h5>Файли:</h5>-->
@@ -42,16 +42,16 @@
 <!--                                           name="fileTitle" placeholder="Назва файлу">-->
 <!--                                    <input type="text" class="form-control mb-2" id="fileType"-->
 <!--                                           name="fileTipe" placeholder="Тип файлу">-->
-<!--                                <input type="file" class="form-control mb-2" id="addFile"-->
-<!--                                       name="addFile">-->
+<!--                                <input type="file" class="form-control mb-2" id="editFile"-->
+<!--                                       name="editFile">-->
 <!--                                <button class="btn btn-outline-warning" onclick="uploadFile()">Додати</button>-->
 <!--                                </form>-->
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="reset" class="btn btn-secondary" data-dismiss="modal">Відмінити</button>
-                            <button type="button" name="send" data-bs-dismiss="modal" onclick="saveDocument()"
-                                    class="btn btn-primary">Додати документ
+                            <button type="button" name="send" data-bs-dismiss="modal" onclick="editDocument()"
+                                    class="btn btn-primary">Зберігти зміни
                             </button>
                         </div>
                     </form>

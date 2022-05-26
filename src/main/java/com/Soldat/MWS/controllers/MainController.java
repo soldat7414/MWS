@@ -16,9 +16,15 @@ public class MainController {
     }
 
     @GetMapping("mws/organization/{id}")
-    public String doc (@PathVariable long id, Model model) {
+    public String organization (@PathVariable long id, Model model) {
         model.addAttribute("id", id);
         return ("company");
+    }
+
+    @GetMapping("mws/document/{id}")
+    public String document (@PathVariable long id, Model model) {
+        model.addAttribute("docId", id);
+        return ("document");
     }
 
 }

@@ -19,15 +19,6 @@ function addContact() {
         contentType: 'application/json',
         cache: false,
         data: data,
-        /*data: JSON.stringify({
-            //id: id,
-            country: $("#country").val(),
-            region: $("#region").val(),
-            district: $("#district").val(),
-            locality: $("#locality").val(),
-            street: $("#street").val(),
-            building: $("#building").val(),
-        }),*/
         success: function (contactId) {
             bindContact(contactId)
         }
@@ -39,7 +30,6 @@ function bindContact(contactId) {
         url: '/contacts',
         dataType: 'json',
         type: 'PUT',
-        // contentType: 'application/json',
         cache: false,
         data: {
             entityId: contactId,

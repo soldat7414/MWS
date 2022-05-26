@@ -3,6 +3,7 @@ package com.Soldat.MWS.entity.models.organization_models;
 import com.Soldat.MWS.entity.OrganizationEntity;
 import com.Soldat.MWS.entity.models.address_models.Address;
 import com.Soldat.MWS.entity.models.contact_models.Contact;
+import com.Soldat.MWS.entity.models.document_models.Document;
 import com.Soldat.MWS.entity.models.person_models.Person;
 import com.Soldat.MWS.entity.models.person_models.PersonWithoutLinks;
 
@@ -17,7 +18,7 @@ public class Organization{
     //links
     private List<Person> employees;
 //    private List<Object> objects;
-//    private List<Document> documents;
+    private List<Document> licenses;
 //    private List<Object> objectCustomer;
 //    private List<Correspondence> correspondenceFrom;
 //    private Correspondence correspondenceTo;
@@ -31,6 +32,7 @@ public class Organization{
         organization.setTitle(orgEntity.getTitle());
         if(orgEntity.getContrParty()!=null)organization.setContrParty(orgEntity.getContrParty());
         if(orgEntity.getEmployees()!=null)organization.setEmployees(PersonWithoutLinks.toModelList(orgEntity.getEmployees()));
+        if(orgEntity.getLicenses()!=null)organization.setLicenses(Document.toModelList(orgEntity.getLicenses()));
 //        if(organization.getObjects()!=null)organization.setObjects(new ToModelList<Object, ObjectEntity>().parse(orgEntity.getObjects()));
 //        if(organization.getDocuments()!=null)organization.setDocuments(new ToModelList<Document, DocumentEntity>().parse(orgEntity.getDocuments()));
 //        if(organization.getObjectCustomer()!=null)organization.setObjectCustomer(new ToModelList<Object, ObjectEntity>().parse(orgEntity.getObjectCustomer()));
@@ -97,5 +99,13 @@ public class Organization{
 
     public void setContacts(List<Contact> contacts) {
         this.contacts = contacts;
+    }
+
+    public List<Document> getLicenses() {
+        return licenses;
+    }
+
+    public void setLicenses(List<Document> licenses) {
+        this.licenses = licenses;
     }
 }

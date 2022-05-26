@@ -34,8 +34,8 @@ public class DocementServiceImpl implements DocumentService {
     ServiceE<ObjectEntity> objService;
 
     private long containSameInDB(DocumentEntity doc) {
-        Optional<DocumentEntity> result = repo.findByTitleAndDescriptionAndDocType(doc.getTitle(),
-                doc.getDescription(), doc.getDocType());
+        Optional<DocumentEntity> result = repo.findByTitleAndDescriptionAndWhatDocument(doc.getTitle(),
+                doc.getDescription(), doc.getWhatDocument());
         return result.map(DocumentEntity::getId).orElse(-1L);
     }
 
@@ -44,6 +44,7 @@ public class DocementServiceImpl implements DocumentService {
         long id = containSameInDB(doc);
         if (id > 0) throw new DocumentAlreadyExistException("Такий документ вже записаний до бази даних.", id);
         doc.setLastChangeDate(new Date());
+        doc.setCreateDate(new Date());
         return repo.save(doc).getId();
     }
 
@@ -63,6 +64,31 @@ public class DocementServiceImpl implements DocumentService {
     }
 
     @Override
+    public List<DocumentEntity> getBy(long entityId, Functions function) throws NotFoundException {
+        Iterable<DocumentEntity> docs = null;
+        switch (function){
+            case ORGANIZATION:{
+                OrganizationEntity org = orgService.getById(entityId);
+                docs = repo.findByOrganization(org);
+                break;
+            }
+            case ADD_PERSON:{
+                PersonEntity person = personService.getById(entityId);
+                docs = repo.findByPerson(person);
+                break;
+            }
+            case ADD_OBJECT:{
+                ObjectEntity obj = objService.getById(entityId);
+                docs = repo.findByObject(obj);
+                break;
+            }
+        }
+        List<DocumentEntity> all = new ArrayList<>();
+        if(docs!=null) docs.forEach(all::add);
+        return all;
+    }
+
+    @Override
     public long delete(long id) throws DocumentNotFoundException {
         repo.delete(this.getById(id));
         return id;
@@ -72,7 +98,7 @@ public class DocementServiceImpl implements DocumentService {
     public DocumentEntity edit(long id, DocumentEntity entity) throws DocumentNotFoundException {
         DocumentEntity doc = this.getById(id);
         if(entity.getTitle()!=null)doc.setTitle(entity.getTitle());
-        if(entity.getDocType()!=null)doc.setDocType(entity.getDocType());
+        if(entity.getWhatDocument()!=null)doc.setWhatDocument(entity.getWhatDocument());
         if(entity.getDescription()!=null)doc.setDescription(entity.getDescription());
         doc.setLastChangeDate(new Date());
         return repo.save(doc);

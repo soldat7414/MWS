@@ -5,6 +5,8 @@ import com.Soldat.MWS.exceptions.AlreadyExistException;
 import com.Soldat.MWS.exceptions.FileNotFoundException;
 import com.Soldat.MWS.services.ServiceE;
 import com.Soldat.MWS.services.impl.FileServiceImpl;
+import org.apache.tomcat.util.codec.binary.Base64;
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
@@ -17,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.MalformedURLException;
 import java.util.Date;
 import java.util.List;
@@ -33,7 +36,7 @@ public class UpDownLoadService {
     @Value("${upload.path}")
     String uploadPath;
 
-    public String uploadFile(MultipartFile uploadFile, String title,
+    public long uploadFile(MultipartFile uploadFile, String title,
                              String fileType) throws IOException, AlreadyExistException {
 
         if (uploadFile != null) {
@@ -41,14 +44,18 @@ public class UpDownLoadService {
             if (!uploadDir.exists()) uploadDir.mkdirs();
             String uuidFile = UUID.randomUUID().toString();
             String resultFileName = uuidFile + "." + uploadFile.getOriginalFilename();
-
-            uploadFile.transferTo(new File(uploadDir, resultFileName));
-
-            fileService.add(new FileEntity(resultFileName, new Date(), fileType, uploadDir+resultFileName));
-
-            return "File uploaded";
+            File item = new File(uploadDir, resultFileName);
+            item.setReadable(true);
+            uploadFile.transferTo(item);
+            FileEntity file = new FileEntity();
+            file.setTitle(title);
+            file.setFileType(fileType);
+            file.setAddDate(new Date());
+            file.setItem(item.getAbsolutePath());
+            long idFile = fileService.add(file);
+            return idFile;
         }
-        return "There none file";
+        return -1;
     }
 
     public Resource downloadFile(String title, String fileType) throws FileNotFoundException, MalformedURLException {

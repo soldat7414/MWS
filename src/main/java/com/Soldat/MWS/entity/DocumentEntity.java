@@ -14,7 +14,7 @@ public class DocumentEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String title;
-    private String docType;
+    private String whatDocument;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "document")
     private List<FileEntity> items;
     private Date createDate;
@@ -67,12 +67,12 @@ public class DocumentEntity {
         this.title = title;
     }
 
-    public String getDocType() {
-        return docType;
+    public String getWhatDocument() {
+        return whatDocument;
     }
 
-    public void setDocType(String docType) {
-        this.docType = docType;
+    public void setWhatDocument(String whatDocument) {
+        this.whatDocument = whatDocument;
     }
 
     public List<FileEntity> getItems() {

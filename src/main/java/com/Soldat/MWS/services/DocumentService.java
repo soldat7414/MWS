@@ -19,6 +19,8 @@ public interface DocumentService extends ServiceE<DocumentEntity> {
     @Override
     List<DocumentEntity> getAll();
 
+    List<DocumentEntity> getBy(long entityId, Functions function) throws NotFoundException;
+
     @Override
     long delete(long id) throws DocumentNotFoundException;
 

@@ -1,7 +1,6 @@
 package com.Soldat.MWS.services.impl;
 
-import com.Soldat.MWS.entity.DocumentEntity;
-import com.Soldat.MWS.entity.FileEntity;
+import com.Soldat.MWS.entity.*;
 import com.Soldat.MWS.exceptions.FileAlreadyExistException;
 import com.Soldat.MWS.exceptions.FileNotFoundException;
 import com.Soldat.MWS.exceptions.NotFoundException;
@@ -58,6 +57,21 @@ public class FileServiceImpl implements FileService {
         Iterable<FileEntity> files = repo.findAll();
         List<FileEntity> all = new ArrayList<>();
         files.forEach(all::add);
+        return all;
+    }
+
+    public List<FileEntity> getBy(long entityId, Functions function) throws NotFoundException {
+        Iterable<FileEntity> files = null;
+        switch (function){
+            case DOCUMENT:{
+                DocumentEntity doc = docService.getById(entityId);
+                files = repo.findByDocument(doc);
+                break;
+            }
+
+        }
+        List<FileEntity> all = new ArrayList<>();
+        if(files!=null) files.forEach(all::add);
         return all;
     }
 

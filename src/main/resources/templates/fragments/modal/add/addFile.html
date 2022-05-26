@@ -1,16 +1,16 @@
-<div th:fragment="addDocument">
+<div th:fragment="addFile">
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal"
-            data-bs-target="#addDocument">
-        Додати документ
+            data-bs-target="#addFile">
+        Додати файл
     </button>
 
     <!-- Modal -->
-    <div class="modal fade" id="addDocument" tabindex="-1" aria-labelledby="addDocumentLabel" aria-hidden="true">
+    <div class="modal fade" id="addFile" tabindex="-1" aria-labelledby="addFileLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addDocumentLabel">Новий документ</h5>
+                    <h5 class="modal-title" id="addFileLabel">Новий файл</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -20,19 +20,23 @@
 <!--                                <label class="sr-only" for="doctype">Тип документа</label>-->
 <!--                                <input type="text" class="form-control mb-2" id="doctype"-->
 <!--                                       name="doctype" placeholder="Тип документа">-->
-                                <select class="form-select" name="whatDocument" aria-label="Тип документа" id="whatDocument">
-                                    <option selected value="Ліцензія">Ліцензія</option>
-                                    <option value="Дозвіл">Дозвіл</option>
-                                    <option value="Інше">Інше</option>
-                                </select>
+<!--                                <select class="form-select" aria-label="Тип документа" id="region">-->
+<!--                                    <option selected value="Ліцензія">Ліцензія</option>-->
+<!--                                    <option value="Дозвіл">Дозвіл</option>-->
+<!--                                    <option value="Інше">Інше</option>-->
+<!--                                </select>-->
 
-                                <label class="sr-only" for="titleDoc">Назва документа</label>
-                                <input type="text" class="form-control mb-2" id="titleDoc"
-                                       name="titleDoc" placeholder="Назва документа">
+                                <label class="sr-only" for="titleFile">Назва документа</label>
+                                <input type="text" class="form-control mb-2" id="titleFile"
+                                       name="titleFile" placeholder="Назва файла">
 
-                                <label class="sr-only" for="descriptionDoc">Пояснення</label>
-                                <input type="text" class="form-control mb-2" id="descriptionDoc"
-                                       name="descriptionDoc" placeholder="Пояснення">
+                                <label class="sr-only" for="fileType">Тип документа</label>
+                                <input type="text" class="form-control mb-2" id="fileType"
+                                       name="fileType" placeholder="Пояснення">
+
+                                <input type="file" class="form-control mb-2" id="item"
+                                       name="item" >
+
 
 <!--                                <hr style="color: darkorange;" />-->
 <!--                                <h5>Файли:</h5>-->
@@ -50,8 +54,8 @@
                         </div>
                         <div class="modal-footer">
                             <button type="reset" class="btn btn-secondary" data-dismiss="modal">Відмінити</button>
-                            <button type="button" name="send" data-bs-dismiss="modal" onclick="saveDocument()"
-                                    class="btn btn-primary">Додати документ
+                            <button type="button" name="send" data-bs-dismiss="modal" onclick="uploadFile()"
+                                    class="btn btn-primary">Додати файл
                             </button>
                         </div>
                     </form>

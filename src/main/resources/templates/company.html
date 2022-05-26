@@ -17,62 +17,64 @@
 <div class="container-720">
     <div class="row">
         <div class="col-3">
-            <div class="card border-light mb-3" style="max-width: 99%;">
-                <div class="card-header text-center"><h3>КОМПАНІЇ</h3></div>
-                <div class="card-body">
-<!--                    <div th:replace="fragments/modal/add/addComp::addComp"></div>-->
-                    <div id="company"></div>
-                </div>
-            </div>
-
+<!--            <div class="card border-light mb-3" style="max-width: 99%;">-->
+<!--                <div class="card-header text-center"><h3>КОМПАНІЇ</h3></div>-->
+<!--                <div class="card-body">-->
+<!--                    &lt;!&ndash;                    <div th:replace="fragments/modal/add/addComp::addComp"></div>&ndash;&gt;-->
+<!--                    <div id="company"></div>-->
+<!--                </div>-->
+<!--            </div>-->
 
         </div>
 
 
+        <div class="col-6" style="padding: 0">
+<!--            Title, address, contacts-->
+            <div style="background-color: #0b0b0b; border-radius: 10px; padding: 10px; margin-bottom: 10px">
+                <!--            Organization title-->
+                <div class="position-relative" style="border-bottom: solid; border-bottom-color: #ff8c0a; padding: 5px">
+                    <h1 id="titleOrg" class="text-center" style="color: darkorange"></h1>
+                    <div class="text-right" th:replace="fragments/modal/edit/editComp::editComp"></div>
+                </div>
+                <!--            Address-->
 
+                <div class="position-relative" style="border-bottom: solid; border-bottom-color: #ff8c0a; padding: 5px">
+                    <div style="color: darkorange" id="address">
+                        <h4>Адресса:</h4>
+                        <p style="color: rgba(231,181,122,0.99)"><span id="country"></span>, <span id="region"></span>,
+                            <span id="district"></span> , <span id="locality"></span>,
+                            <span id="street"></span>, <span id="building"></span></p>
+                        <div class="text-right" th:replace="fragments/modal/edit/editAddress::editAddress"></div>
+                    </div>
+                </div>
+                <div id="noAddress" style="border-bottom: solid; border-bottom-color: #ff8c0a; padding: 5px">
+                    <h4 style="color: darkorange">Адресса:</h4>
+                    <div th:replace="fragments/modal/add/addAddress::addAddress"></div>
+                </div>
+                <!--            Contacts-->
+                <div class="position-relative" style="border-bottom: solid; border-bottom-color: #ff8c0a; padding: 5px">
+                    <h4 style="color: darkorange">Контакти:</h4>
+                    <ul id="contact" style="color: rgba(231,181,122,0.99)">
+                        <!--                    <li id="contact"></li>-->
+                    </ul>
+                    <div class="text-right" th:replace="fragments/modal/add/addContact::addContact"></div>
+                    <div class="text-right" th:replace="fragments/modal/edit/editContact::editContact"></div>
+                </div>
 
-
-
-
-
-
-        <div class="col-6" style="background-color: #0b0b0b">
-<!--            Organization title-->
-            <div class="position-relative" style="border-bottom: solid; border-bottom-color: #ff8c0a">
-                <h1 id="titleOrg" class="text-center" style="color: darkorange"></h1>
-                <div class="text-right" th:replace="fragments/modal/edit/editComp::editComp"></div>
             </div>
-<!--            Address-->
-            <div class="position-relative"  style="border-bottom: solid; border-bottom-color: #ff8c0a">
-                <div style="color: darkorange" id="address">
-                    <h4>Адресса:</h4>
-                    <p style="color: rgba(231,181,122,0.99)"><span id="country"></span>, <span id="region"></span>,
-                        <span id="district"></span> , <span id="locality"></span>,
-                        <span id="street"></span>, <span id="building"></span></p>
-                    <div class="text-right" th:replace="fragments/modal/edit/editAddress::editAddress"></div>
+
+            <!--            License and permissions-->
+            <div style="background-color: #0b0b0b; border-radius: 10px; padding: 10px; margin-bottom: 10px">
+                <div class="position-relative" style="border-bottom: solid; border-bottom-color: #ff8c0a; padding: 5px">
+                    <h4 style="color: darkorange">Ліцензія та дозволи:</h4>
+                    <ul id="license" style="color: rgba(231,181,122,0.99)">
+                        <!--                    <li>licenses</li>-->
+                    </ul>
+                    <div class="text-right" th:insert="fragments/modal/add/addDocument::addDocument"></div>
+<!--                    <div class="text-right" th:replace="fragments/modal/edit/editDocument::editDocument"></div>-->
                 </div>
             </div>
-            <div id="noAddress">
-                <div th:replace="fragments/modal/add/addAddress::addAddress"></div>
-            </div>
-<!--            Contacts-->
-            <div class="position-relative" style="border-bottom: solid; border-bottom-color: #ff8c0a">
-                <h4  style="color: darkorange">Контакти:</h4>
-                <ul id="contact" style="color: rgba(231,181,122,0.99)">
-<!--                    <li id="contact"></li>-->
-                </ul>
-                <div class="text-right" th:replace="fragments/modal/add/addContact::addContact"></div>
-                <div class="text-right" th:replace="fragments/modal/edit/editContact::editContact"></div>
-            </div>
         </div>
-
-
-
-
-
-
-
-
 
 
         <div class="col-3">
@@ -92,6 +94,8 @@
 <script th:src="@{../../js/organization/organization.js}"></script>
 <script th:src="@{../../js/address/address.js}"></script>
 <script th:src="@{../../js/contact/contact.js}"></script>
+<script th:src="@{../../js/document/document.js}"></script>
+<script th:src="@{../../js/file/file.js}"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>

@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class Document {
     private long id;
     private String title;
-    private String docType;
+    private String whatDocument;
     private List<File> items;
     private Date createDate;
     private Date lastChangeDate;
@@ -21,7 +21,7 @@ public class Document {
         Document doc = new Document();
         if(entity.getId()!=0)doc.setId(entity.getId());
         if(entity.getTitle()!=null)doc.setTitle(entity.getTitle());
-        if(entity.getDocType()!=null)doc.setDocType(entity.getDocType());
+        if(entity.getWhatDocument()!=null)doc.setWhatDocument(entity.getWhatDocument());
         doc.setCreateDate(entity.getCreateDate());
         doc.setLastChangeDate(entity.getLastChangeDate());
         if(entity.getDescription()!=null)doc.setDescription(entity.getDescription());
@@ -54,12 +54,12 @@ public class Document {
         this.title = title;
     }
 
-    public String getDocType() {
-        return docType;
+    public String getWhatDocument() {
+        return whatDocument;
     }
 
-    public void setDocType(String docType) {
-        this.docType = docType;
+    public void setWhatDocument(String whatDocument) {
+        this.whatDocument = whatDocument;
     }
 
     public List<File> getItems() {
