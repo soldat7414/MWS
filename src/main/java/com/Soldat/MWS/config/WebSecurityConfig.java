@@ -18,8 +18,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 //    @Autowired
 //    private DataSource dataSource;
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+
+    public WebSecurityConfig(UserService userService) {
+        this.userService = userService;
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {

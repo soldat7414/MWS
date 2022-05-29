@@ -3,6 +3,7 @@ package com.Soldat.MWS.RESTcontrollers.entity_controllers;
 import com.Soldat.MWS.entity.FileEntity;
 import com.Soldat.MWS.entity.models.document_models.Document;
 import com.Soldat.MWS.entity.models.file_models.File;
+import com.Soldat.MWS.entity.supporting_classes.User;
 import com.Soldat.MWS.exceptions.AlreadyExistException;
 import com.Soldat.MWS.exceptions.NotFoundException;
 import com.Soldat.MWS.services.FileService;
@@ -10,6 +11,7 @@ import com.Soldat.MWS.services.ServiceE;
 import com.Soldat.MWS.services.utils.Functions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -49,8 +51,10 @@ public class FileController {
     }
 
     @PostMapping
-    public ResponseEntity add(@RequestBody FileEntity file) {
+    public ResponseEntity add(@RequestBody FileEntity file,
+                              @AuthenticationPrincipal User user) {
         try {
+            file.setAuthor(user);
             return ResponseEntity.ok(service.add(file));
         } catch (AlreadyExistException ex) {
             return ResponseEntity.badRequest().body(ex.getMessage() + ex.getId());

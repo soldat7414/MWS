@@ -1,6 +1,7 @@
 package com.Soldat.MWS.entity;
 
 import com.Soldat.MWS.entity.models.address_models.Address;
+import com.Soldat.MWS.entity.supporting_classes.User;
 
 import javax.persistence.*;
 import java.util.List;
@@ -18,6 +19,10 @@ public class AddressEntity {
     private String street;
     private String building;
     private String coordinates;
+
+    //from what account was created organization
+    @ManyToOne(fetch = FetchType.EAGER)
+    private User author;
     //connections
     //address of person
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "address")
@@ -137,5 +142,13 @@ public class AddressEntity {
 
     public void setObjects(List<ObjectEntity> objects) {
         this.objects = objects;
+    }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
     }
 }

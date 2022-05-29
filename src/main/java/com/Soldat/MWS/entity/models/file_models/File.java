@@ -2,6 +2,7 @@ package com.Soldat.MWS.entity.models.file_models;
 
 import com.Soldat.MWS.entity.DocumentEntity;
 import com.Soldat.MWS.entity.FileEntity;
+import com.Soldat.MWS.entity.supporting_classes.User;
 
 import java.util.Date;
 import java.util.List;
@@ -15,6 +16,7 @@ public class File {
     private String fileType;
     private String item;
     private DocumentEntity document;
+    private User author;
 
     //toModel
     public static File toModel (FileEntity entity){
@@ -26,6 +28,7 @@ public class File {
         if(entity.getTitle()!=null)file.setTitle(entity.getTitle());
         if(entity.getFileType()!=null)file.setFileType(entity.getFileType());
         if(entity.getItem()!=null)file.setItem(entity.getItem());
+        if(entity.getAuthor()!=null)file.setAuthor(entity.getAuthor());
             return file;
     }
 
@@ -92,4 +95,11 @@ public class File {
         this.document = document;
     }
 
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
+    }
 }

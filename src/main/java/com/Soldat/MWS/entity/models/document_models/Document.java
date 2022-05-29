@@ -2,6 +2,7 @@ package com.Soldat.MWS.entity.models.document_models;
 
 import com.Soldat.MWS.entity.DocumentEntity;
 import com.Soldat.MWS.entity.models.file_models.File;
+import com.Soldat.MWS.entity.supporting_classes.User;
 
 import java.util.Date;
 import java.util.List;
@@ -15,6 +16,7 @@ public class Document {
     private Date createDate;
     private Date lastChangeDate;
     private String description;
+    private User author;
 
     //toModel
     public static Document toModel (DocumentEntity entity){
@@ -26,6 +28,7 @@ public class Document {
         doc.setLastChangeDate(entity.getLastChangeDate());
         if(entity.getDescription()!=null)doc.setDescription(entity.getDescription());
         if(entity.getItems()!=null)doc.setItems(File.toModelList(entity.getItems()));
+        if(entity.getAuthor()!=null)doc.setAuthor(entity.getAuthor());
         return doc;
     }
 
@@ -92,5 +95,13 @@ public class Document {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
     }
 }

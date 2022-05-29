@@ -2,6 +2,7 @@ package com.Soldat.MWS.RESTcontrollers.entity_controllers;
 
 import com.Soldat.MWS.entity.ContactEntity;
 import com.Soldat.MWS.entity.models.contact_models.Contact;
+import com.Soldat.MWS.entity.supporting_classes.User;
 import com.Soldat.MWS.exceptions.AlreadyExistException;
 import com.Soldat.MWS.exceptions.NotFoundException;
 import com.Soldat.MWS.services.ContactService;
@@ -10,6 +11,7 @@ import com.Soldat.MWS.services.impl.ContactServiceImpl;
 import com.Soldat.MWS.services.utils.Functions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -46,8 +48,10 @@ public class ContactController {
     }
 
     @PostMapping
-    public ResponseEntity add(@RequestBody ContactEntity contact) {
+    public ResponseEntity add(@RequestBody ContactEntity contact,
+                              @AuthenticationPrincipal User user) {
         try {
+            contact.setAuthor(user);
             return ResponseEntity.ok(service.add(contact));
         } catch (AlreadyExistException ex) {
             return ResponseEntity.badRequest().body(ex.getMessage() + ex.getId());

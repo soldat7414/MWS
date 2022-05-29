@@ -1,6 +1,7 @@
 package com.Soldat.MWS.entity;
 
 import com.Soldat.MWS.entity.models.object_models.Object;
+import com.Soldat.MWS.entity.supporting_classes.User;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -19,6 +20,9 @@ public class ObjectEntity {
     private Date endBuilding;
     private Date addObject;
     private Date lastChange;
+    //from what account was created organization
+    @ManyToOne(fetch = FetchType.EAGER)
+    private User author;
     //    private String project;
     //connections
     //address of object
@@ -150,5 +154,13 @@ public class ObjectEntity {
 
     public void setLastChange(Date lastChange) {
         this.lastChange = lastChange;
+    }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
     }
 }

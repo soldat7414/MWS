@@ -2,12 +2,14 @@ package com.Soldat.MWS.RESTcontrollers.entity_controllers;
 
 import com.Soldat.MWS.entity.AddressEntity;
 import com.Soldat.MWS.entity.models.address_models.Address;
+import com.Soldat.MWS.entity.supporting_classes.User;
 import com.Soldat.MWS.exceptions.AlreadyExistException;
 import com.Soldat.MWS.exceptions.NotFoundException;
 import com.Soldat.MWS.services.ServiceE;
 import com.Soldat.MWS.services.utils.Functions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -27,8 +29,10 @@ public class AddressController {
     }
 
     @PostMapping
-    public ResponseEntity add(@RequestBody AddressEntity address) {
+    public ResponseEntity add(@RequestBody AddressEntity address,
+                              @AuthenticationPrincipal User user) {
         try {
+            address.setAuthor(user);
             return ResponseEntity.ok(service.add(address));
         } catch (AlreadyExistException ex) {
             return ResponseEntity.badRequest().body(ex.getMessage() + ex.getId());

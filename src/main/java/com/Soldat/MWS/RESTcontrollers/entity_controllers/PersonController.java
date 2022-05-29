@@ -2,12 +2,14 @@ package com.Soldat.MWS.RESTcontrollers.entity_controllers;
 
 import com.Soldat.MWS.entity.PersonEntity;
 import com.Soldat.MWS.entity.models.person_models.Person;
+import com.Soldat.MWS.entity.supporting_classes.User;
 import com.Soldat.MWS.exceptions.AlreadyExistException;
 import com.Soldat.MWS.exceptions.NotFoundException;
 import com.Soldat.MWS.services.ServiceE;
 import com.Soldat.MWS.services.utils.Functions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.http.ResponseEntity.ok;
@@ -38,8 +40,10 @@ public class PersonController {
     }
 
     @PostMapping
-    public ResponseEntity add(@RequestBody PersonEntity person) {
+    public ResponseEntity add(@RequestBody PersonEntity person,
+                              @AuthenticationPrincipal User user) {
         try {
+            person.setAuthor(user);
             return ok(service.add(person));
         } catch (AlreadyExistException ex) {
             return ResponseEntity.badRequest().body(ex.getMessage() + ex.getId());

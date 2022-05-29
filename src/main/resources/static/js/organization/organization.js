@@ -7,7 +7,7 @@ function showOrganization() {
         console.log(org);
         //title
         $("#titleOrg").html(org.title);
-        $("#author").html(org.author.username)
+        $("#author").html("Автор: " + org.author.name + " " + org.author.surname)
         $("#titleOrgModal").html(org.title);
         //address
         let address = org.address;

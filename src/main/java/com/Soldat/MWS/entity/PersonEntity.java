@@ -2,6 +2,7 @@ package com.Soldat.MWS.entity;
 
 
 import com.Soldat.MWS.entity.models.person_models.Person;
+import com.Soldat.MWS.entity.supporting_classes.User;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -18,6 +19,9 @@ public class PersonEntity {
     private String lastName;
     private String surname;
     private String position;
+    //from what account was created organization
+    @ManyToOne(fetch = FetchType.EAGER)
+    private User author;
 
     //connection
     //address of person
@@ -146,5 +150,13 @@ public class PersonEntity {
 
     public void setPermissions(List<DocumentEntity> permissions) {
         this.permissions = permissions;
+    }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
     }
 }

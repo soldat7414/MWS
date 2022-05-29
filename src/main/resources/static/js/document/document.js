@@ -55,6 +55,12 @@ function showDocumentsByOrg() {
 function showEnyDocs(data, tegId) {
     let document = "";
     for (i = 0; i < data.length; i++) {
+        let authorName = "";
+        let authorSurname = "";
+        if(data[i].author != null){
+            authorName = data[i].author.name;
+            authorSurname = data[i].author.surname;
+        }else authorName = "Невідомий"
         document = "<div class=\"card border-warning text-warning mb-3 \" style=\"max-width: 99%; margin:0;\">" +
             "<div class=\"modal-header\" >" + data[i].whatDocument +
             "<div>" +
@@ -69,6 +75,7 @@ function showEnyDocs(data, tegId) {
             "<a class=\"card-title\"> href=\"" + data[i].item + "\"</a>" +
 
             "<p class=\"card-text\">" + "id = " + data[i].id + "</p>" +
+            "<p class=\"card-text\">" + "Автор: " + authorName + " " + authorSurname + "</p>" +
 
             "</div>"
         $("#"+tegId).append(document)

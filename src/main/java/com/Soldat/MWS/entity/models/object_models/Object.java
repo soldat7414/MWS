@@ -5,6 +5,7 @@ import com.Soldat.MWS.entity.ObjectEntity;
 import com.Soldat.MWS.entity.models.address_models.Address;
 import com.Soldat.MWS.entity.models.organization_models.Organization;
 import com.Soldat.MWS.entity.models.person_models.Person;
+import com.Soldat.MWS.entity.supporting_classes.User;
 
 import java.util.Date;
 import java.util.List;
@@ -25,6 +26,7 @@ public class Object {
     private Organization builder;
     private Person techSupervisor;
     private Person authorSupervisor;
+    private User author;
 //    private List<Document> contract;
 //    private List<Correspondence> correspondence;
 
@@ -42,6 +44,7 @@ public class Object {
         if(entity.getBuilder()!=null)object.setBuilder(entity.getBuilder().toModel());
         if(entity.getTechSupervisor()!=null)object.setTechSupervisor(entity.getTechSupervisor().toModel());
         if(entity.getAuthorSupervisor()!=null)object.setAuthorSupervisor(entity.getAuthorSupervisor().toModel());
+        if(entity.getAuthor()!=null)object.setAuthor(entity.getAuthor());
 //        if(entity.getTitle()!=null)object.setContract(new ToModelList<Document, DocumentEntity>().parse(entity.getContract()));
 //        if(entity.getTitle()!=null)object.setCorrespondence(new ToModelList<Correspondence, CorrespondenceEntity>().parse(entity.getCorrespondence()));
         return object;
@@ -144,6 +147,14 @@ public class Object {
 
     public void setLastChange(Date lastChange) {
         this.lastChange = lastChange;
+    }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
     }
 }
 

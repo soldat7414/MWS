@@ -4,6 +4,7 @@ import com.Soldat.MWS.entity.PersonEntity;
 import com.Soldat.MWS.entity.models.address_models.Address;
 import com.Soldat.MWS.entity.models.contact_models.Contact;
 import com.Soldat.MWS.entity.models.organization_models.Organization;
+import com.Soldat.MWS.entity.supporting_classes.User;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,6 +19,7 @@ public class Person {
     private Address address;
     private List<Contact> contacts;
     private Organization organization;
+    private User author;
 
     //to model
     //@Override
@@ -32,6 +34,7 @@ public class Person {
         if(personEntity.getPhoneNumbers()!=null)person.setContacts(personEntity.getPhoneNumbers().stream()
                 .map(Contact::toModel).collect(Collectors.toList()));
         if(personEntity.getOrganization()!=null)person.setOrganization(personEntity.getOrganization().toModel());
+        if(personEntity.getAuthor()!=null)person.setAuthor(personEntity.getAuthor());
         return person;
     }
 
@@ -106,5 +109,13 @@ public class Person {
 
     public void setOrganization(Organization organization) {
         this.organization = organization;
+    }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
     }
 }

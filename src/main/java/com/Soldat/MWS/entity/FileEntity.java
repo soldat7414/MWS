@@ -1,5 +1,7 @@
 package com.Soldat.MWS.entity;
 
+import com.Soldat.MWS.entity.supporting_classes.User;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -13,6 +15,9 @@ public class FileEntity {
     private Date lastChange;
     private String fileType;
     private String item;
+    //from what account was created organization
+    @ManyToOne(fetch = FetchType.EAGER)
+    private User author;
 
     @ManyToOne
     @PrimaryKeyJoinColumn
@@ -87,6 +92,14 @@ public class FileEntity {
 
     public void setDocument(DocumentEntity document) {
         this.document = document;
+    }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
     }
 
     @Override

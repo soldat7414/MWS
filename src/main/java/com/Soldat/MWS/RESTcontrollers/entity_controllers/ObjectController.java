@@ -2,12 +2,14 @@ package com.Soldat.MWS.RESTcontrollers.entity_controllers;
 
 import com.Soldat.MWS.entity.ObjectEntity;
 import com.Soldat.MWS.entity.models.object_models.Object;
+import com.Soldat.MWS.entity.supporting_classes.User;
 import com.Soldat.MWS.exceptions.AlreadyExistException;
 import com.Soldat.MWS.exceptions.NotFoundException;
 import com.Soldat.MWS.services.ServiceE;
 import com.Soldat.MWS.services.utils.Functions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -36,8 +38,10 @@ public class ObjectController {
     }
 
     @PostMapping
-    public ResponseEntity add(@RequestBody ObjectEntity object) {
+    public ResponseEntity add(@RequestBody ObjectEntity object,
+                              @AuthenticationPrincipal User user) {
         try {
+            object.setAuthor(user);
             return ResponseEntity.ok(service.add(object));
         } catch (AlreadyExistException ex) {
             return ResponseEntity.badRequest().body(ex.getMessage() + ex.getId());

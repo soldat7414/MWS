@@ -2,6 +2,7 @@ package com.Soldat.MWS.entity.models.contact_models;
 
 
 import com.Soldat.MWS.entity.ContactEntity;
+import com.Soldat.MWS.entity.supporting_classes.User;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,12 +12,14 @@ public class Contact {
     private long id;
     private String contact;
     private String species;
+    private User author;
 
     public static Contact toModel(ContactEntity entity) {
         Contact contact = new Contact();
         contact.setId(entity.getId());
         contact.setContact(entity.getContact());
         contact.setSpecies(entity.getSpecies());
+        if(entity.getAuthor()!=null)contact.setAuthor(entity.getAuthor());
 
         return contact;
     }
@@ -51,5 +54,13 @@ public class Contact {
 
     public void setSpecies(String species) {
         this.species = species;
+    }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
     }
 }

@@ -2,6 +2,7 @@ package com.Soldat.MWS.entity.models.address_models;
 
 
 import com.Soldat.MWS.entity.AddressEntity;
+import com.Soldat.MWS.entity.supporting_classes.User;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,6 +17,7 @@ public class Address{
     private String street;
     private String building;
     private String coordinates;
+    private User author;
 
     //to model
     public static Address toModel(AddressEntity addressEntity){
@@ -28,6 +30,7 @@ public class Address{
         address.setStreet(addressEntity.getStreet());
         address.setBuilding(addressEntity.getBuilding());
         address.setCoordinates(addressEntity.getCoordinates());
+        if(addressEntity.getAuthor()!=null)address.setAuthor(addressEntity.getAuthor());
         return address;
     }
 
@@ -104,6 +107,13 @@ public class Address{
         this.coordinates = coordinates;
     }
 
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
+    }
 
     @Override
     public String toString() {

@@ -2,6 +2,7 @@ package com.Soldat.MWS.entity;
 
 import com.Soldat.MWS.entity.models.contact_models.Contact;
 import com.Soldat.MWS.entity.models.organization_models.Organization;
+import com.Soldat.MWS.entity.supporting_classes.User;
 
 import javax.persistence.*;
 
@@ -13,6 +14,10 @@ public class ContactEntity {
     private long id;
     private String contact;
     private String species;
+    //from what account was created contact
+    @ManyToOne(fetch = FetchType.EAGER)
+    private User author;
+
     //links
     //person who's is this contact
     @ManyToOne
@@ -72,5 +77,13 @@ public class ContactEntity {
 
     public void setOrganization(OrganizationEntity organization) {
         this.organization = organization;
+    }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
     }
 }

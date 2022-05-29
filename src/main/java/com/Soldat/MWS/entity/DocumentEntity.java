@@ -1,6 +1,7 @@
 package com.Soldat.MWS.entity;
 
 import com.Soldat.MWS.entity.models.document_models.Document;
+import com.Soldat.MWS.entity.supporting_classes.User;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -20,6 +21,9 @@ public class DocumentEntity {
     private Date createDate;
     private Date lastChangeDate;
     private String description;
+    //from what account was created organization
+    @ManyToOne(fetch = FetchType.EAGER)
+    private User author;
     //links
 
     //license or else document have the person
@@ -131,5 +135,12 @@ public class DocumentEntity {
         this.object = object;
     }
 
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
+    }
 }
 
