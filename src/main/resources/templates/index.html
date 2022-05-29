@@ -11,6 +11,13 @@
 </head>
 <body>
 
+<div>
+    <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
+</div>
+
 <div class="container">
     <div class="row">
         <div class="col-4">

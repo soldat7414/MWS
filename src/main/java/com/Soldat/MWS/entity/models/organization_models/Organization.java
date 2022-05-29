@@ -6,6 +6,7 @@ import com.Soldat.MWS.entity.models.contact_models.Contact;
 import com.Soldat.MWS.entity.models.document_models.Document;
 import com.Soldat.MWS.entity.models.person_models.Person;
 import com.Soldat.MWS.entity.models.person_models.PersonWithoutLinks;
+import com.Soldat.MWS.entity.supporting_classes.User;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,6 +25,7 @@ public class Organization{
 //    private Correspondence correspondenceTo;
     private Address address;
     private List<Contact> contacts;
+    private User author;
 
     //to model
     public static Organization toModel (OrganizationEntity orgEntity){
@@ -40,6 +42,7 @@ public class Organization{
 //        if(organization.getCorrespondenceTo()!=null)organization.setCorrespondenceTo(new Correspondence().toModel(orgEntity.getCorrespondenceTo()));
         if(orgEntity.getAddress()!=null)organization.setAddress(orgEntity.getAddress().toModel());
         if(orgEntity.getContacts()!=null)organization.setContacts(Contact.toModelList(orgEntity.getContacts()));
+        if(orgEntity.getAuthor()!=null)organization.setAuthor(orgEntity.getAuthor());
         return organization;
     }
 
@@ -107,5 +110,13 @@ public class Organization{
 
     public void setLicenses(List<Document> licenses) {
         this.licenses = licenses;
+    }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
     }
 }

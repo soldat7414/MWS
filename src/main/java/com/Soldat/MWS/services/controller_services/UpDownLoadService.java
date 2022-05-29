@@ -68,6 +68,7 @@ public class UpDownLoadService {
         throw new FileNotFoundException("directory didn't find");
     }
 
+
     public Stream<Resource> downloadAllFiles(){
         List<FileEntity> files = fileService.getAll();
        return files.stream().map(file -> {

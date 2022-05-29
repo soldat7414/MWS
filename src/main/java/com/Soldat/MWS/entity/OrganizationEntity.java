@@ -1,6 +1,7 @@
 package com.Soldat.MWS.entity;
 
 import com.Soldat.MWS.entity.models.organization_models.Organization;
+import com.Soldat.MWS.entity.supporting_classes.User;
 
 import javax.persistence.*;
 import java.util.List;
@@ -14,6 +15,9 @@ public class OrganizationEntity {
     private long id;
     private String title;
     private String contrParty;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private User author;
 
     //links
     //employees of organization include manager
@@ -131,5 +135,13 @@ public class OrganizationEntity {
 
     public void setLicenses(List<DocumentEntity> licenses) {
         this.licenses = licenses;
+    }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
     }
 }

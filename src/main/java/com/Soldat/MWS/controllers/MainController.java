@@ -9,8 +9,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Controller
 public class MainController {
 
-    @GetMapping("/mws")
+    @GetMapping("/")
     public String greeting() {
+
+        return "greeting";
+    }
+
+    @GetMapping("/mws")
+    public String main() {
 
         return "index";
     }

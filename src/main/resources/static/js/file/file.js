@@ -66,16 +66,39 @@ function showEnyFiles(data, tegId) {
             "<button type=\"button\" class=\"btn-outline-warning btn btn-sm rounded-pill\" " +
             "onclick = \"deleteFile(" + data[i].id + ")\">&#128465</button>"+
             "</div>" +"</div>" +
-            "<div class=\"card-body\">" +
+            "<div class=\"card-body row\"><div class=\"col-6\">" +
             "<h5 class=\"card-title\">" + data[i].fileType + "</h5>" +
-            "<h3 class=\"card-title\">Створено: " + data[i].description + "</h3>" +
-            "< iframe src = \"https://docs.google.com/viewer?url=\""+ data[i].item +"\" > </ iframe >"+
+            "<h3 class=\"card-title\">Створено: " + data[i].description + "</h3></div><div class=\"col-6\">" +
+            // "<iframe src = \"https://docs.google.com/viewer?url=\""+ data[i].item +"\" > </ iframe >"+
+            "<iframe  width = '100% ' height =' 100% ' frameborder ='1' src = \"https://docs.google.com/viewer?url=\"/files/'"+ data[i].title +"\" > </ iframe >"+
             // "<a class=\"card-title\"> href=\"" +  + "\"</a>" +
 
             "<p class=\"card-text\">" + "id = " + data[i].id + "</p>" +
 
-            "</div>"
+            "</div></div>"
         $("#"+tegId).append(file)
         // $("#license").and("<div th:insert=\"fragments/modal/add/addFile::addFile\">document</div>")
     }
 }
+
+function deleteFile(fileId) {
+    $.ajax({
+        url: '/file/'+fileId,
+        dataType: 'json',
+        type: 'DELETE',
+        cache: false,
+        // data: {
+        //     entityId: fileId,
+        //     linkId: docId,
+        //     function: "ADD_DOCUMENT",
+        // },
+        success: function () {
+            $.getScript("../../js/utils/editDOM.js", function () {
+                removeRowsFrom('files')
+            });
+            showFilesByDocument(docId)
+        }
+    })
+
+}
+
