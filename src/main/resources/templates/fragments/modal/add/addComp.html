@@ -1,11 +1,11 @@
 <div th:fragment="addComp">
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Додати компанію
     </button>
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal warning fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -28,9 +28,9 @@
                             </select>
                         </div>
                         <div class="modal-footer">
-                            <button type="reset" class="btn btn-secondary" data-dismiss="modal">Відмінити</button>
+                            <button type="reset" class="btn btn-outline-warning" data-dismiss="modal">Відмінити</button>
                             <button type="button" name="send" data-bs-dismiss="modal" onclick="saveOrg()"
-                                    class="btn btn-primary">Додати компанію</button>
+                                    class="btn btn-outline-warning">Додати компанію</button>
                         </div>
                     </form>
                 </div>

@@ -5,7 +5,7 @@ $(document).ready(function () {
 function showObjects() {
     $.get('/object', {text: "Text"}, function (data) {
         console.log(data);
-        let object;
+        let object="";
         for (i = 0; i < data.length; i++) {
             object = object + "<div class=\"card border-warning mb-3\" style=\"max-width: 99%;\">" +
                 "<div class=\"card-header\" >" + data[i].title + "</div>" +
