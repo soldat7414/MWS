@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>MWS - users</title>
+</head>
+<body>
+<!--<div th:if="${param.error}">-->
+<!--    Invalid username and password.-->
+<!--</div>-->
+<!--<div th:if="${param.logout}">-->
+<!--    You have been logged out.-->
+<!--</div>-->
+<!--add new user-->
+<!--<p th:text ${message}></p>-->
+<form th:action="@{/user}" method="post">
+    <div><label> id     : <input type="hidden" name="userId" th:attr="value=${user.id}"/> </label></div>
+    <div><label> Нік     : <input type="text" name="username" th:attr="value=${user.username}"/> </label></div>
+    <div><label> Ім'я    : <input type="text" name="name" th:attr="value=${user.name}"/> </label></div>
+    <div><label> Фамілія : <input type="text" name="surname" th:attr="value=${user.surname}"/> </label></div>
+    <div><label> e-mail  : <input type="text" name="email" th:attr="value=${user.email}"/> </label></div>
+    <div><label> Пароль  : <input type="password" name="password"/> </label></div>
+    <div th:each = "role: ${roles}">
+        <div>
+            <lable><input type="checkbox" th:name="${role}"  th:checked="${#lists.contains(user.roles, role)}">
+                <span th:text = "${role}"></span></lable>
+        </div>
+    </div>
+    <button type="submit" >Save</button>
+</form>
+<!--<table border="1">-->
+<!--    <tr>-->
+<!--        <th>id</th>-->
+<!--        <th>name</th>-->
+<!--        <th>surname</th>-->
+<!--        <th>email</th>-->
+<!--        <th>username</th>-->
+<!--        <th>password</th>-->
+<!--        <th>role</th>-->
+<!--        <th>role</th>-->
+<!--        <th>edit</th>-->
+<!--    </tr>-->
+<!--    <tr th:each="user: ${users}">-->
+<!--        <td th:utext="${user.id}"></td>-->
+<!--        <td th:utext="${user.name}" ></td>-->
+<!--        <td th:utext="${user.surname}" ></td>-->
+<!--        <td th:utext="${user.email}" ></td>-->
+<!--        <td th:utext="${user.username}" ></td>-->
+<!--        <td th:utext="${user.password}"></td>-->
+<!--&lt;!&ndash;        <td th:utext="${user.roles}"><td/>&ndash;&gt;-->
+<!--        <td>-->
+<!--            <ul th:each="role: ${user.roles}">-->
+<!--                <li th:utext="${role}"></li>-->
+<!--            </ul>-->
+<!--        <td/>-->
+<!--        <td><a th:href="@{'/user/'+${user.id}}">edit</a></td>-->
+<!--    </tr>-->
+<!--    <div th:each = "user: ${users}">-->
+<!--        <h3 th:utext="${user.username}"></h3>-->
+<!--        <p>id: <span th:utext="${user.id}"></span>; name: <span th:utext="${user.name}"></span> <span th:utext="${user.surname}"></span>  </p>-->
+<!--        <p th:text="${user.roles}"></p>-->
+<!--        <ul th:each="role: ${user.roles}">-->
+<!--            <li th:utext="${role.name}"></li>-->
+<!--        </ul>-->
+<!--    </div>-->
+
+<!--</table>-->
+</body>
+</html>
