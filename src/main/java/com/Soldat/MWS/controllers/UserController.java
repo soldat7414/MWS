@@ -16,7 +16,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Controller
-@PreAuthorize("hasAuthority('ADMIN')")
+@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 @RequestMapping("/user")
 public class UserController {
     @Autowired
@@ -32,6 +32,12 @@ public class UserController {
     public String userEdit(@PathVariable User user, Model model){
         model.addAttribute("user", user);
         model.addAttribute("roles", Role.values());
+        return "userEdit";
+    }
+
+    @GetMapping("{user}/delete")
+    public String userDelete(@PathVariable User user, Model model){
+       userRepo.delete(user);
         return "userEdit";
     }
 

@@ -1,11 +1,13 @@
 package com.Soldat.MWS.controllers;
 
 import org.springframework.http.StreamingHttpOutputMessage;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+@PreAuthorize("hasAuthority('ROLE_USER')")
 @Controller
 public class MainController {
 

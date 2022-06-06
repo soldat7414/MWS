@@ -2,24 +2,66 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <title>MWS - log-in</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="UTF-8">
+    <title>MWS - Log in</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
-<body>
+<body style="background-color: #212121">
 <div th:if="${param.error}">
     Invalid username and password.
 </div>
 <div th:if="${param.logout}">
     You have been logged out.
 </div>
-add new user
-<p th:text ${message}></p>
-<form th:action="@{/registration}" method="post">
-    <div><label> Нік     : <input type="text" name="username"/> </label></div>
-    <div><label> Ім'я    : <input type="text" name="name"/> </label></div>
-    <div><label> Фамілія : <input type="text" name="surname"/> </label></div>
-    <div><label> e-mail  : <input type="text" name="email"/> </label></div>
-    <div><label> Пароль  : <input type="password" name="password"/> </label></div>
-    <div><input type="submit" value="Sign In"/></div>
 </form>
+<div class="container-720">
+    <div class="row">
+        <div class="col-3">
+        </div>
+
+        <div class="col-6" style="padding: 0; color: darkorange">
+            <div class="card  border-warning mb-3 text-center">
+                <div class="card-header">
+                    <div th:if="${param.error}">
+                        Невірне ім'я чи пароль!
+                    </div>
+                    <div th:if="${param.logout}">
+                        Ви вийшли із свого облікового запису.
+                    </div>
+                    <h3>Регістрація</h3>
+                </div>
+                <div class="card-body">
+                    <p th:text ${message}></p>
+                    <form th:action="@{/registration}" method="post">
+                        <div><input class="border-warning mb-3" type="text" name="username" placeholder="Нік"/></div>
+                        <div><input class="border-warning mb-3" type="text" name="name" placeholder="Ім'я"/></div>
+                        <div><input class="border-warning mb-3" type="text" name="surname" placeholder="Фамілія"/></div>
+                        <div><input class="border-warning mb-3" type="email" name="email" placeholder="e-mail"/></div>
+                        <div><input class="border-warning mb-3" type="password" name="password" placeholder="Пароль"/></div>
+                        <div><input class="btn btn-outline-warning" type="submit" value="Зареєструватись"/></div>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <div th:if="${param.error}">
+                        Невірне ім'я чи пароль!
+                    </div>
+                    <div th:if="${param.logout}">
+                        Ви вийшли із свого облікового запису.
+                    </div>
+                    <div th:text="${message}"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-3">
+        </div>
+
+    </div>
+</div>
+
 </body>
 </html>

@@ -31,6 +31,8 @@
         <th>role</th>
         <th>role</th>
         <th>edit</th>
+        <th>delete</th>
+        <th>isActivated</th>
     </tr>
     <tr th:each="user: ${users}">
         <td th:utext="${user.id}"></td>
@@ -46,6 +48,9 @@
             </ul>
         <td/>
         <td><a th:href="@{'/user/'+${user.id}}">edit</a></td>
+        <td><a th:href="@{'/user/'+${user.id}}+'/delete'">delete</a></td>
+        <td th:utext="${user.activationCode}"></td>
+
     </tr>
 <!--    <div th:each = "user: ${users}">-->
 <!--        <h3 th:utext="${user.username}"></h3>-->

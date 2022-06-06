@@ -19,6 +19,7 @@ public class User implements UserDetails {
     private String surname;
     private String email;
     private boolean active;
+    private String activationCode;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
@@ -115,5 +116,13 @@ public class User implements UserDetails {
 
     public void setRole(Role role){
         this.getRoles().add(role);
+    }
+
+    public String getActivationCode() {
+        return activationCode;
+    }
+
+    public void setActivationCode(String activationCode) {
+        this.activationCode = activationCode;
     }
 }
