@@ -39,14 +39,8 @@
             <div class="col-6"
                  style="display: flex; flex-direction: row; justify-content: flex-end; align-items: center ">
                 <div style="text-align: center; color: darkorange">
-                    <p style="text-align: center; color: darkorange; padding-right: 10px" th:inline="text">
-                        Користувач: [[${#httpServletRequest.remoteUser}]]
-                        [[${#httpServletRequest.userPrincipal.Authorities}]]
-                        [[${#httpServletRequest.getUserPrincipal.Authorities}]]
-                        [[${#httpServletRequest.isUserInRole('ADMIN')}]]
-
-                        <span sec:authentication="userName"></span>
-<!--                    <div th:text="${@Authentication.getUserName()}">...</div>-->
+                    <p style="display: block; text-align: center; color: darkorange; padding-right: 10px" th:inline="text">
+                        [[${user?.name}]] [[${user?.surname}]]
                     </p>
                 </div>
                 <form th:action="@{/logout}" method="post">

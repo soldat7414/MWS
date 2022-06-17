@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+<html xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="utf-8">
@@ -36,13 +36,61 @@
                 </div>
                 <div class="card-body">
                     <p th:text ${message}></p>
-                    <form th:action="@{/registration}" method="post">
-                        <div><input class="border-warning mb-3" type="text" name="username" placeholder="Нік"/></div>
-                        <div><input class="border-warning mb-3" type="text" name="name" placeholder="Ім'я"/></div>
-                        <div><input class="border-warning mb-3" type="text" name="surname" placeholder="Фамілія"/></div>
-                        <div><input class="border-warning mb-3" type="email" name="email" placeholder="e-mail"/></div>
-                        <div><input class="border-warning mb-3" type="password" name="password" placeholder="Пароль"/></div>
-                        <div><input class="btn btn-outline-warning" type="submit" value="Зареєструватись"/></div>
+                    <form class="needs-validation" th:action="@{/registration}" th:object="${user}" method="post">
+                        <div>
+                            <input class="border-warning mb-3 is-invalid" type="text" name="username" placeholder="Нік"
+                                   th:value="${user?.username}"/>
+                            <div class="invalid-feedback"
+                                 th:if="${#fields.hasErrors('username')}"
+                                 th:errors="*{username}">invalid feedback
+                            </div>
+                        </div>
+                        <div>
+                            <input class="border-warning mb-3 is-invalid" type="text" name="name" placeholder="Ім'я"
+                                   th:value="${user?.name}"/>
+                            <div class="invalid-feedback"
+                                 th:if="${#fields.hasErrors('name')}"
+                                 th:errors="*{name}">invalid feedback
+                            </div>
+                        </div>
+                        <div>
+                            <input class="border-warning mb-3 is-invalid" type="text" name="surname" placeholder="Фамілія"
+                                   th:value="${user?.surname}"/>
+                            <div class="invalid-feedback"
+                                 th:if="${#fields.hasErrors('surname')}"
+                                 th:errors="*{surname}">invalid feedback
+                            </div>
+                        </div>
+                        <div>
+                            <input class="border-warning mb-3 is-invalid" type="email" name="email" placeholder="e-mail"
+                                   th:value="${user?.email}"/>
+                            <div class="invalid-feedback"
+                                 th:if="${#fields.hasErrors('email')}"
+                                 th:errors="*{email}">invalid feedback
+                            </div>
+                        </div>
+                        <div>
+                            <input class="border-warning mb-3 is-invalid" type="password" name="password" placeholder="Пароль"
+                                   th:value="${user?.password}"/>
+                            <div class="invalid-feedback"
+                                 th:if="${#fields.hasErrors('password')}"
+                                 th:errors="*{password}">invalid feedback
+                            </div>
+                        </div>
+                        <div>
+                            <input class="border-warning mb-3 is-invalid" type="password" name="password2" placeholder="Пароль"/>
+                            <div class="invalid-feedback"
+                                 th:if="${#fields.hasErrors('password2')}"
+                                 th:errors="*{password2}">invalid feedback
+                            </div>
+                            <div class="invalid-feedback"
+                                 th:if="${passwordError !=null}"
+                                 th:text="${passwordError}">
+                            </div>
+                        </div>
+                        <div>
+                            <input class="btn btn-outline-warning" type="submit" value="Зареєструватись"/>
+                        </div>
                     </form>
                 </div>
                 <div class="card-footer">

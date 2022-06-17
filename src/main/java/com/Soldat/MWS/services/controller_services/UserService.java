@@ -35,8 +35,8 @@ public class UserService implements UserDetailsService {
         }
 
         user.setActive(true);
-//        user.setRole(Role.ROLE_USER);
-//        user.setRole(Role.ROLE_ADMIN);
+        user.setRole(Role.ROLE_USER);
+        user.setRole(Role.ROLE_ADMIN);
         user.setActivationCode(UUID.randomUUID().toString());
 
         userRepo.save(user);
@@ -52,9 +52,7 @@ public class UserService implements UserDetailsService {
                     user.getActivationCode()
             );
             mailSender.send(user.getEmail(), "Activation code", message);
-
         }
-
         return true;
     }
 
@@ -66,7 +64,7 @@ public class UserService implements UserDetailsService {
         }
 
         user.setActivationCode(null);
-        user.setRole(Role.ROLE_USER);
+//        user.setRole(Role.ROLE_USER);
 
         userRepo.save(user);
 

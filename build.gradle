@@ -16,6 +16,10 @@ dependencies {
 
 //    thymeleaf
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    // https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf-spring4
+    implementation 'org.thymeleaf:thymeleaf-spring4:3.0.11.RELEASE'
+
+
 
 //    springBoot + web
     implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -34,6 +38,10 @@ dependencies {
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+
+    //validation
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation
+    implementation 'org.springframework.boot:spring-boot-starter-validation:2.7.0'
 
 
 
