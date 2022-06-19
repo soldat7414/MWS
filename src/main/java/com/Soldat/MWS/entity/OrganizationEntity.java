@@ -2,8 +2,10 @@ package com.Soldat.MWS.entity;
 
 import com.Soldat.MWS.entity.models.organization_models.Organization;
 import com.Soldat.MWS.entity.supporting_classes.User;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 import java.util.Objects;
 
@@ -13,6 +15,8 @@ public class OrganizationEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @NotBlank(message = "Введіть назву організації!")
+    @Length(min=4, max = 30, message = "Назва не має бути коротша за 3 символи")
     private String title;
     private String contrParty;
 

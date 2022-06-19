@@ -29,9 +29,9 @@ public class UploadController {
         }
     }
 
-    @GetMapping("/{title}")
+    @GetMapping("/{fileType}/{title}")
     public ResponseEntity<?> downloadFile(@PathVariable String title,
-                                                 @RequestParam String fileType){
+                                          @PathVariable String fileType){
         try{
             return ResponseEntity.ok(service.downloadFile(title, fileType));
         }catch (IOException | NotFoundException ex){

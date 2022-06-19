@@ -3,7 +3,6 @@
 let addrId = localStorage.getItem('addrId')
 console.log(addrId + " in  address")
 
-
 function editAddress() {
     let form = document.forms["editAddressForm"];
     let fd = new FormData(form);
@@ -28,6 +27,7 @@ function editAddress() {
 
     })
 }
+
 function addAddress() {
     let form = document.forms["addAddressForm"];
     let fd = new FormData(form);

@@ -13,6 +13,7 @@
 <body style="background-color: #212121">
 <script>
     let docId = [[${id}]]
+    let orgId = -1
     console.log(docId)
 </script>
 <div th:insert="fragments/header::header"></div>
@@ -52,7 +53,6 @@
                 </div>
             </div>
 
-            <!--            License and permissions-->
             <div style="background-color: #0b0b0b; border-radius: 10px; padding: 10px; margin-bottom: 10px">
                 <div class="position-relative" style="border-bottom: solid; border-bottom-color: #ff8c0a; padding: 5px">
                     <h4 style="color: darkorange">Файли:</h4>
@@ -60,20 +60,13 @@
                         <!--                    <li>licenses</li>-->
                     </ul>
                     <div class="text-right" th:insert="fragments/modal/add/addFile::addFile"></div>
-<!--                    <div class="text-right" th:replace="fragments/modal/edit/editDocument::editDocument"></div>-->
                 </div>
             </div>
         </div>
 
 
         <div class="col-3">
-<!--            <div class="card border-light mb-3" style="max-width: 100%;">-->
-<!--                <div class="card-header text-center"><h3>ДОКУМЕНТИ</h3></div>-->
-<!--                <div class="card-body">-->
-<!--                    <div th:replace="fragments/modal/add/addDocument::addDocument"></div>-->
-<!--                    <div id="documents"></div>-->
-<!--                </div>-->
-<!--            </div>-->
+
         </div>
 
     </div>
@@ -86,6 +79,7 @@
 <!--<script th:src="@{../../js/address/address.js}"></script>-->
 <!--<script th:src="@{../../js/contact/contact.js}"></script>-->
 <script th:src="@{../../js/document/documentById.js}"></script>
+<script th:src="@{../../js/person/person.js}"></script>
 <!--<script th:src="@{../../js/document/document.js}"></script>-->
 <script th:src="@{../../js/file/file.js}"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"

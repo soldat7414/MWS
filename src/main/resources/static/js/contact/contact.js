@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    showContactModal();
+    showContactByOrg();
 });
 
 function addContact() {
@@ -75,9 +75,9 @@ function editContact() {
     })
 }
 
-function showContactModal() {
+function showContactByOrg() {
     $.ajax({
-        url: '/contacts/org/'+id,
+        url: '/contacts/org/'+orgId,
         dataType: 'json',
         type: 'get',
         contentType: 'application/json',

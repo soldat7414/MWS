@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -40,7 +41,8 @@ public class OrganizationController {
     }
 
     @PostMapping
-    public ResponseEntity add(@RequestBody OrganizationEntity org,
+    public ResponseEntity add(@RequestBody @Valid OrganizationEntity org,
+
                               @AuthenticationPrincipal User user) {
         try {
             org.setAuthor(user);

@@ -1,9 +1,12 @@
 $(document).ready(function () {
     showOrganization();
+    // $.getScript("../../js/person/person.js", function () {
+    //     showPeople();
+    // });
 });
 
 function showOrganization() {
-    $.get('/organization/' + id, {text: "Text"}, function (org) {
+    $.get('/organization/' + orgId, {text: "Text"}, function (org) {
         console.log(org);
         //title
         $("#titleOrg").html(org.title);
@@ -43,7 +46,7 @@ function showOrganization() {
 
 function editOrg() {
     $.ajax({
-        url: '/organization/' + id,
+        url: '/organization/' + orgId,
         dataType: 'json',
         type: 'PUT',
         contentType: 'application/json',
@@ -66,7 +69,7 @@ function orgAddAddress(addressId) {
         // contentType: 'application/json',
         cache: false,
         data: {
-            entityId: id,
+            entityId: orgId,
             linkId: addressId,
             function: "ADD_ADDRESS",
         },

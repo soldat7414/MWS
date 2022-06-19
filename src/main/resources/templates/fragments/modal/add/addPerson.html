@@ -1,0 +1,57 @@
+<div th:fragment="addPerson">
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-outline-warning"
+            data-bs-toggle="modal" data-bs-target="#addPerson">
+        Додати людину
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="addPerson" tabindex="-1" aria-labelledby="personModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="personModal"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form" name="addPersonForm">
+                        <div class="form-row align-items-center">
+                            <div class="col-auto">
+                                <label class="sr-only" for="firstName">Ім'я</label>
+                                <input type="text" class="form-control mb-2" id="firstName"
+                                       name="firstName" placeholder="Ім'я">
+                            </div>
+                            <div class="col-auto">
+                                <label class="sr-only" for="lastName">Побатькові</label>
+                                <input type="text" class="form-control mb-2" id="lastName"
+                                       name="lastName" placeholder="Побатькові">
+                            </div>
+                            <div class="col-auto">
+                                <label class="sr-only" for="surname">Фамілія</label>
+                                <input type="text" class="form-control mb-2" id="surname"
+                                       name="surname" placeholder="Фамілія">
+                            </div>
+                            <div class="col-auto">
+                                <label class="sr-only" for="position">Посада</label>
+                                <input type="text" class="form-control mb-2" id="position"
+                                       name="position" placeholder="Посада">
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="reset" class="btn btn-secondary" data-dismiss="modal">Відмінити</button>
+                            <button type="button" name="send" data-bs-dismiss="modal" onclick="addPerson()"
+                                    class="btn btn-primary">Зберегти
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

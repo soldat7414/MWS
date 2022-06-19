@@ -34,13 +34,17 @@ public class MainController {
     }
 
     @GetMapping("mws/organization/{id}")
-    public String organization (@PathVariable long id, Model model) {
+    public String organization (@AuthenticationPrincipal User user,
+                                @PathVariable long id, Model model) {
+        model.addAttribute("user", user);
         model.addAttribute("id", id);
         return ("company");
     }
 
     @GetMapping("mws/document/{id}")
-    public String document (@PathVariable long id, Model model) {
+    public String document (@AuthenticationPrincipal User user,
+                            @PathVariable long id, Model model) {
+        model.addAttribute("user", user);
         model.addAttribute("docId", id);
         return ("document");
     }

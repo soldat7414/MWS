@@ -11,21 +11,20 @@
 </head>
 <body style="background-color: #212121">
 <script>
-    let id = [[${id}]]
-    console.log(id)
+    let orgId = [[${id}]]
+    console.log(orgId)
 </script>
 <div th:insert="fragments/header::header"></div>
 <div class="container-720">
     <div class="row">
         <div class="col-3">
-<!--            <div class="card border-light mb-3" style="max-width: 99%;">-->
-<!--                <div class="card-header text-center"><h3>КОМПАНІЇ</h3></div>-->
-<!--                <div class="card-body">-->
-<!--                    &lt;!&ndash;                    <div th:replace="fragments/modal/add/addComp::addComp"></div>&ndash;&gt;-->
-<!--                    <div id="company"></div>-->
-<!--                </div>-->
-<!--            </div>-->
-
+       <div style="background-color: #0b0b0b; border-radius: 10px; padding: 10px; margin-bottom: 10px">
+                <div class="card-header text-center"><h3>ЛЮДИ</h3></div>
+                <div class="card-body">
+                    <div th:replace="fragments/modal/add/addPerson::addPerson"></div>
+                    <div id="people"></div>
+                </div>
+            </div>
         </div>
 
 
@@ -100,6 +99,7 @@
 <script th:src="@{../../js/contact/contact.js}"></script>
 <script th:src="@{../../js/document/document.js}"></script>
 <script th:src="@{../../js/file/file.js}"></script>
+<script th:src="@{../../js/person/person.js}"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
