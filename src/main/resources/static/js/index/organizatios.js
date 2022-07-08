@@ -1,5 +1,6 @@
 $(document).ready(function () {
     showOrganizations();
+    clickDiv();
 });
 
 function showOrganizations() {
@@ -7,7 +8,7 @@ function showOrganizations() {
         console.log(data);
         let comp="";
         for (i = 0; i < data.length; i++) {
-            comp = comp + "<div class=\"card border-warning mb-3\" style=\"max-width: 99%;\">" +
+            comp = comp + "<div type='button' href='http://localhost:8080/mws/organization/"+ data[i].id + "' class=\"href card border-warning mb-3\" style=\"max-width: 99%;\">" +
                 "<div class=\"card-header\" >" + data[i].contrParty + "</div>" +
                 "<div class=\"card-body\">" +
                 "<h5 class=\"card-title\">" + data[i].title + "</h5>" +
@@ -19,6 +20,17 @@ function showOrganizations() {
         $("#company").html(comp);
     });
 }
+function clickDiv(){
+    $("div.href").click(function(){
+        let attr = $(this).attr('href');
+        if(attr !== 'undefined' && attr !== false){
+        console.log("click")
+        console.log(attr)
+        window.location=$(this).attr('attr');
+        }
+    });
+}
+
 
 function saveOrg() {
     $.ajax({

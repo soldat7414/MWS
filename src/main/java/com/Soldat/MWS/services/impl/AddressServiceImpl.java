@@ -36,10 +36,10 @@ public class AddressServiceImpl implements AddressService {
         return result.map(AddressEntity::getId).orElse(-1L);
     }
 
-    public long add (AddressEntity address) throws AddressAlreadyExistException {
+    public AddressEntity add (AddressEntity address) throws AddressAlreadyExistException {
         long id = containSameInDB(address);
         if(id>0) throw new AddressAlreadyExistException("Таку адресу вже внесено в базу данихю", id);
-        return repo.save(address).getId();
+        return repo.save(address);
     }
 
     public AddressEntity getById (long id) throws AddressNotFoundException{

@@ -30,13 +30,13 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public long add(FileEntity file) throws FileAlreadyExistException {
+    public FileEntity add(FileEntity file) throws FileAlreadyExistException {
         Optional<FileEntity> entity = repo.findByTitle(file.getTitle());
         if (entity.isPresent()) throw new FileAlreadyExistException(
                 "Такий файл вже записано до бази даних.", entity.get().getId());
         file.setLastChange(new Date());
         System.out.println(file);
-        return repo.save(file).getId();
+        return repo.save(file);
     }
 
     @Override

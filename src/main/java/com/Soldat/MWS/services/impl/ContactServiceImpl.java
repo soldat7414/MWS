@@ -32,11 +32,11 @@ public class ContactServiceImpl implements ContactService {
     ServiceE<OrganizationEntity> orgService;
 
     @Override
-    public long add(ContactEntity entity) throws ContactAlreadyExistException {
+    public ContactEntity add(ContactEntity entity) throws ContactAlreadyExistException {
         Optional<ContactEntity> contact = repo.findByContact(entity.getContact());
         if(contact.isPresent()) throw new ContactAlreadyExistException(
                 "Такий контакт вже внесено до бази даних! ", contact.get().getId());
-        else return repo.save(entity).getId();
+        else return repo.save(entity);
     }
 
     @Override

@@ -34,11 +34,11 @@ public class ObjectServiceImpl implements ObjectService {
     private ServiceE<AddressEntity> addressService;
 
     @Override
-    public long add(ObjectEntity entity) throws ObjectAlreadyExistException {
+    public ObjectEntity add(ObjectEntity entity) throws ObjectAlreadyExistException {
         Optional<ObjectEntity> obj = repo.findByTitle(entity.getTitle());
         if (obj.isPresent()) throw new ObjectAlreadyExistException(
                 "Об'єкт з такою назвою вже внесена до бази даних.", obj.get().getId());
-        else return repo.save(entity).getId();
+        else return repo.save(entity);
     }
 
     @Override

@@ -14,11 +14,12 @@
 </head>
 <body style="background-color: #212121">
 <div th:fragment="header">
-    <div class="container-720"
-         style="background-color: #0b0b0b; border-radius: 10px; padding: 10px; margin-bottom: 10px; align-items: center">
-        <div class="row">
-            <div class="col-6" style="margin: 0">
-                <nav style="--bs-breadcrumb-divider: '';" aria-label="breadcrumb">
+    <div class="container-720 px-3 mb-2"
+         style="background-color: #0b0b0b; border-radius: 10px;">
+        <div class="row p-0">
+
+            <div class="col-5 m-0  d-flex flex-row bd-highlight align-items-center" >
+                <nav class="top-50 start-0" style="--bs-breadcrumb-divider: '';" aria-label="breadcrumb">
                     <ol class="breadcrumb" style="margin: 0">
                         <li class="btn btn-outline-warning" style="margin: 5px">
                             <a style="color: darkorange" href="/mws">MWC</a>
@@ -35,17 +36,22 @@
                 </nav>
             </div>
 
+            <div class="col-2 p-0 m-0" >
+                <img th:src="@{../../images/logo/logo_transparent.png}"  height="120" alt=""><img  />
+            </div>
 
-            <div class="col-6"
-                 style="display: flex; flex-direction: row; justify-content: flex-end; align-items: center ">
-                <div style="text-align: center; color: darkorange">
-                    <p style="display: block; text-align: center; color: darkorange; padding-right: 10px" th:inline="text">
-                        [[${user?.name}]] [[${user?.surname}]]
-                    </p>
+            <div class="col-5 d-flex flex-row-reverse bd-highlight align-items-center">
+                <div class="d-flex flex-row bd-highlight">
+                    <div class="p-2 bd-highlight" style="color: darkorange">
+                        <div style="color: darkorange"
+                             th:inline="text">
+                            [[${user?.name}]] [[${user?.surname}]]
+                        </div>
+                    </div>
+                    <form th:action="@{/logout}" method="post">
+                        <input class="btn btn-outline-warning" type="submit" value="Sign Out"/>
+                    </form>
                 </div>
-                <form th:action="@{/logout}" method="post">
-                    <input class="btn btn-outline-warning" type="submit" value="Sign Out"/>
-                </form>
             </div>
         </div>
     </div>

@@ -53,7 +53,7 @@ public class UpDownLoadService {
             file.setAddDate(new Date());
 //            file.setItem(item.getAbsolutePath());
             file.setItem(resultFileName);
-            long idFile = fileService.add(file);
+            long idFile = fileService.add(file).getId();
             return idFile;
         }
         return -1;

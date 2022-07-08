@@ -33,11 +33,11 @@ public class OrganizationServiceImpl implements OrganizationService {
 
 
     @Override
-    public long add(OrganizationEntity entity) throws OrganizationAlreadyExistException {
+    public OrganizationEntity add(OrganizationEntity entity) throws OrganizationAlreadyExistException {
         Optional<OrganizationEntity> org = repo.findByTitle(entity.getTitle());
         if(org.isPresent()) throw new OrganizationAlreadyExistException(
                 "Організація з такою назвою вже внесена до бази даних.", org.get().getId());
-        else return repo.save(entity).getId();
+        else return repo.save(entity);
     }
 
     @Override

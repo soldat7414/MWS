@@ -13,7 +13,7 @@ import java.util.List;
 public interface ContactService extends ServiceE<ContactEntity> {
 
     @Override
-    long add(ContactEntity entity) throws ContactAlreadyExistException;
+    ContactEntity add(ContactEntity entity) throws ContactAlreadyExistException;
 
     @Override
     ContactEntity getById(long id) throws ContactNotFoundException;

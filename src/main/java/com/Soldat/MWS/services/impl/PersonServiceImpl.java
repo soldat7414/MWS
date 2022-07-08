@@ -42,10 +42,10 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public long add(PersonEntity person) throws PersonAlreadyExistException {
+    public PersonEntity add(PersonEntity person) throws PersonAlreadyExistException {
         long id = containSameInDB(person);
         if (id > 0) throw new PersonAlreadyExistException("Така людина вже записана до бази даних.", id);
-        return repo.save(person).getId();
+        return repo.save(person);
     }
 
     @Override

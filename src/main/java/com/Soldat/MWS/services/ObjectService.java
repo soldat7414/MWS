@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface ObjectService extends ServiceE<ObjectEntity> {
     @Override
-    long add(ObjectEntity entity) throws ObjectAlreadyExistException;
+    ObjectEntity add(ObjectEntity entity) throws ObjectAlreadyExistException;
 
     @Override
     ObjectEntity getById(long id) throws ObjectNotFoundException;
