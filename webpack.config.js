@@ -1,13 +1,14 @@
 
 const path = require('path');
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
+// const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const { VueLoaderPlugin } = require('vue-loader')
 
 module.exports = {
     mode: 'development',
     devtool: 'source-map',
-    entry: path.join(__dirname, 'src', 'main', 'resources', 'static', 'js', 'main.js'),
+    entry: path.join(__dirname, 'src', 'main', 'resources', 'static', 'vueJS', 'main.js'),
     devServer: {
-        contentBase: './dist',
+        static: './dist',
         compress: true,
         port: 8000,
         allowedHosts: [
@@ -18,17 +19,39 @@ module.exports = {
         rules: [
             {
                 test: /\.js$/,
-                exclude: /(node_modules|bower_conponents)/,
+                exclude: /(node_modules|bower_components)/,
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['@babel/presets-env']
+                        presets: ['@babel/preset-env']
                     }
                 }
             },
             {
                 test: /\.vue$/,
                 loader: 'vue-loader'
+            },
+            {
+                test: /\.s(c|a)ss$/,
+                use: [
+                    'vue-style-loader',
+                    'css-loader',
+                    {
+                        loader: 'sass-loader',
+                        // Requires sass-loader@^7.0.0
+                        options: {
+                            implementation: require('sass'),
+                            indentedSyntax: true // optional
+                        },
+                        // Requires >= sass-loader@^8.0.0
+                        options: {
+                            implementation: require('sass'),
+                            sassOptions: {
+                                indentedSyntax: true // optional
+                            },
+                        },
+                    },
+                ]
             }
         ]
 
@@ -38,7 +61,7 @@ module.exports = {
     ],
     resolve: {
         modules: [
-            path.join(__dirname, 'src', 'main', 'resources', 'static', 'js'),
+            path.join(__dirname, 'src', 'main', 'resources', 'static', 'vueJS'),
             path.join(__dirname, 'node_modules'),
         ],
     }

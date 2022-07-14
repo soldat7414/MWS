@@ -1,4 +1,26 @@
 
+import { createApp } from 'vue'
+import VueResource from 'vue-resource'
+import App from "./pages/App.vue";
+
+// App.use(VueResource)
+const vue = createApp(App, {
+    // VueResource: VueResource,
+    render: a => a(App)
+}).mount('#app')
+
+
+// app.component(
+//     App,{
+//         el: '#app',
+//         render: a => a(App)
+//     }
+// )
+// new Vue({
+//     el: '#app',
+//     render: a => a(App)
+// })
+/*
 function getIndex(list, id){
     for(let i = 0; i < list.length; i++){
         if(list[i].id === id){
@@ -131,3 +153,4 @@ let app = new Vue({
         persons: []
     }
 })
+*/
