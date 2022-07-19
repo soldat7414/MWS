@@ -12,7 +12,7 @@
     import axios from "axios";
 
     export default {
-        props: ['persons', 'personAttr'],
+        props: ['persons', 'personAttr', 'hideForm'],
         data() {
             return {
                 firstName: '',
@@ -52,6 +52,9 @@
                 } else {
                     this.savePerson(person)
                 }
+                if(this.hideForm){
+                    this.hideForm()
+                }
             },
             async savePerson(person) {
                 try {
@@ -78,6 +81,7 @@
                 } catch (e) {
                     console.log(e)
                 }
+
             },
             async editPerson(person, id) {
                     await axios({

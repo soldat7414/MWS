@@ -27,7 +27,7 @@ public class MainController {
     @GetMapping("/mws")
     public String main(@AuthenticationPrincipal User user, Model model) {
         model.addAttribute("user", user);
-        return "index1";
+        return "index";
     }
 
     @GetMapping("mws/organization/{id}")
