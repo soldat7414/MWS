@@ -5,13 +5,13 @@
             icon
             color="grey"
             flat="false">
-        <v-icon>mdi-pencil</v-icon>
+        <v-icon><span class="material-icons">delete_outline</span></v-icon>
     </v-btn>
 </template>
 
 <script>
     export default {
-        name: "EditButton"
+        name: "DeleteButton"
     }
 </script>
 

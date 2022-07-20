@@ -17,6 +17,8 @@ import App from "./pages/App.vue";
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 import ui from './components/UI'
+import {aliases, md} from "vuetify/iconsets/md";
+import 'material-design-icons-iconfont/dist/material-design-icons.css' // Ensure your project is capable of handling css files
 
 const app = createApp(App)
 
@@ -33,6 +35,13 @@ const vuetify = createVuetify({
             xl: 1280,
         },
     },
+    icons: {
+        defaultSet: 'md',
+        aliases,
+        sets: {
+            md,
+        },
+    }
 })
 
 app.use(vuetify)

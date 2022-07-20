@@ -24,6 +24,7 @@
                 <v-col
                         cols="4"
                         style="min-width: 100px; max-width: 100%;"
+                        class="column_app"
                 >
                     <v-sheet>
                         <h1>Організації</h1>
@@ -33,6 +34,7 @@
                 <v-col
                         cols="4"
                         style="min-width: 100px; max-width: 100%;"
+                        class="column_app"
                 >
                     <v-sheet>
                        <h1>Об'єкти</h1>
@@ -42,6 +44,7 @@
                 <v-col
                         cols="4"
                         style="min-width: 100px; max-width: 100%;"
+                        class="column_app"
 
                 >
                     <v-sheet>
@@ -105,8 +108,17 @@
     }
 </script>
 
-<style scoped>
-.main-app {
-
+<style>
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Tahoma;
 }
+    .column_app{
+        align-content: center;
+    }
+    h1{
+        align-self: center;
+    }
 </style>

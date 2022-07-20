@@ -1,6 +1,13 @@
 <template>
-    <div>
-        <object-form :objects="objects"/>
+    <div class="list_items">
+        <add-button
+        @click="showModal"
+        />
+        <modal-window v-model:show="modalVisible">
+            <object-form :objects="objects"
+                         v-model:hide="modalVisible"/>
+        </modal-window>
+
         <object-row v-for="object in objects"
                     :object="object"
                     :delete-object="deleteObject"
@@ -26,7 +33,8 @@
         },
         data() {
             return{
-                objects: []
+                objects: [],
+                modalVisible: false
             }
         },
         methods: {
@@ -44,14 +52,20 @@
                     this.objects.splice(Utils.getIndex(this.objects, object.id), 1)
 
                 }
+            },
+            showModal(){
+                this.modalVisible = true
             }
         },
         mounted() {
             this.fetchObjects()
-        }
+        },
+
     }
 </script>
 
 <style scoped>
-
+.list_items{
+    padding: 0 10px;
+}
 </style>

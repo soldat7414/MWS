@@ -1,8 +1,11 @@
 <template>
-    <div>
-        <input type="text" v-model="title" id="title" placeholder="Назва">
-        <input type="text" v-model="contrParty" id="contrParty" placeholder="Сторона відносин">
-        <input type="button" @click="save" value="Зберегти">
+    <div class="form_item">
+        <div>
+            <text-input type="text" v-model="title" id="title" placeholder="Назва"/>
+            <text-input type="text" v-model="contrParty" id="contrParty" placeholder="Сторона відносин"/>
+        </div>
+
+        <save-button class="form_item__btn" type="button" @click="save" value="Зберегти"/>
     </div>
 </template>
 
@@ -13,7 +16,7 @@
         components: {
             Utils
         },
-        props: ['organizations', 'organizationAttr', 'hideForm'],
+        props: ['organizations', 'organizationAttr'],
         data() {
             return {
                 title: '',
@@ -43,6 +46,7 @@
                 if(this.hideForm){
                     this.hideForm()
                 }
+                this.$emit('update:hide', false)
             },
             async saveOrg(organization) {
                 try {
@@ -87,5 +91,13 @@
 </script>
 
 <style scoped>
+    .form_item {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
 
+    .form_item__btn {
+        align-self: end;
+    }
 </style>

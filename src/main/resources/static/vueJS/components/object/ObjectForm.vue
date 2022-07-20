@@ -1,6 +1,9 @@
-<template>
-    <input type="text" v-model="title" id="title" placeholder="Назва компанії">
-    <input type="button" @click="save" value="Зберегти">
+<template >
+    <div class="form_item">
+        <text-input type="text" v-model="title" id="title" placeholder="Назва компанії"/>
+        <save-button class="form_item__btn" type="button" @click="save" value="Зберегти"/>
+    </div>
+
 </template>
 
 <script>
@@ -36,6 +39,7 @@
 
                 }
                 this.title = ''
+                this.$emit('update:hide', false)
             },
             async editObject(object){
                 try{
@@ -73,5 +77,13 @@
 </script>
 
 <style scoped>
+    .form_item {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
 
+    .form_item__btn {
+        align-self: end;
+    }
 </style>

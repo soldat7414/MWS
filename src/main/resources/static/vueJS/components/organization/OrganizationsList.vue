@@ -1,8 +1,14 @@
 <template>
-    <div>
+    <div class="list_items">
+        <add-button
+        @click="showModal"
+        />
+        <modal-window v-model:show="modalVisible">
         <organization-form
                 :organizations="organizations"
+                v-model:hide="modalVisible"
         />
+        </modal-window>
         <organization-row v-for="organization in organizations"
                           :organization="organization"
                           :organizations="organizations"
@@ -24,6 +30,11 @@
         },
         props: ['organizations'],
         // name: "OrganizationsList"
+        data() {
+          return{
+              modalVisible: false
+          }
+        },
         methods: {
             deleteOrg(organization) {
                 let result = this.deleteOrgRequest(organization.id)
@@ -43,11 +54,16 @@
                     console.log(exception)
                 }
 
+            },
+            showModal(){
+                this.modalVisible = true
             }
         }
     }
 </script>
 
 <style scoped>
-
+    .list_items{
+        padding: 0 10px;
+    }
 </style>

@@ -1,6 +1,16 @@
 <template>
-    <div style="position: relative; width: 300px">
-        <person-form :persons="persons" :personAttr="person"/>
+    <div class="list_items">
+
+        <add-button
+                @click="showModal"
+        />
+        <modal-window v-model:show="modalVisible">
+        <person-form
+                :persons="persons"
+                :personAttr="person"
+                v-model:hide="modalVisible"/>
+        </modal-window>
+
         <person-row v-for="person in persons"
                     :key="person.id"
                     :person="person"
@@ -23,7 +33,8 @@
         },
         data() {
             return {
-                person: null
+                person: null,
+                modalVisible: false
             }
         },
         methods: {
@@ -48,6 +59,9 @@
                     console.log(exception)
                 }
 
+            },
+            showModal(){
+                this.modalVisible = true
             }
 
         },
@@ -56,5 +70,7 @@
 </script>
 
 <style scoped>
-
+    .list_items{
+        padding: 0 10px;
+    }
 </style>

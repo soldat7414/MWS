@@ -1,56 +1,22 @@
 <template>
-    <v-card class="mx-auto"
-            max-width="344">
-        <v-card-title>
-            <p>{{ person.surname }} {{ person.firstName }}
-                {{ person.lastName }}</p>
-            <v-btn
-                    variant="outlined"
-                    size="x-small"
-                    icon
-                    color="gray"
-            >
-                <v-icon><span class="material-icons">edit</span></v-icon>
-            </v-btn>
-        </v-card-title>
 
-        <v-card-subtitle>
-            {{ person.firstName }}<input type="button" value="X" @click="del"/>
-        </v-card-subtitle>
-        <v-card-actions>
-            <v-btn
-                    color="orange-lighten-2"
-                    variant="text"
-            >
-                Explore
-            </v-btn>
 
-            <v-spacer></v-spacer>
 
-            <v-btn
-                    :icon="show ? 'mdi-chevron-up' : 'mdi-chevron-down'"
-                    @click="edit"
-            ></v-btn>
-        </v-card-actions>
+    <div class="row_item">
+        <div class="row_item__content">
+            <i>({{ person.id }})</i> {{ person.firstName }}
+        </div>
+        <div class="row_item__buttons">
+            <edit-button type="button" value="Редагувати" @click="edit"/>
+            <delete-button type="button" value="X" @click="del"/>
+        </div>
+    </div>
 
-        <v-expand-transition>
-            <div v-show="show">
-                <v-divider></v-divider>
-
-                <v-card-text>
-                    <person-form :persons="persons" :personAttr="person1" :hideForm="hideForm"/>
-
-                </v-card-text>
-            </div>
-        </v-expand-transition>
-    </v-card>
-<!--    <div>-->
-<!--        <i>({{ person.id }})</i> {{ person.firstName }}-->
-<!--        <span style="position: absolute; right: 0">-->
-<!--        <input type="button" value="Редагувати" @click="edit"/>-->
-<!--        <input type="button" value="X" @click="del"/>-->
-<!--        </span>-->
-<!--    </div>-->
+    <modal-window v-model:show="modalVisible">
+        <person-form :persons="persons"
+                     :personAttr="person1"
+                     :v-model:hide="modalVisible"/>
+    </modal-window>
 </template>
 
 <script>
@@ -62,31 +28,44 @@
         },
         data(){
             return{
-                show: false,
                 person1: null,
-                persons: this.persons
+                persons: this.persons,
+                modalVisible: false
             }
         },
-        // data: () => ({
-        //     show: false,
-        // }),
         methods: {
             edit() {
-                this.show = !this.show
-                //this.editPerson(this.person)
                 this.person1 = this.person
+                this.showModal()
 
             },
             del() {
                 this.deletePerson(this.person)
             },
-            hideForm(){
-                this.show = false
+            showModal() {
+                this.modalVisible = true
             }
         }
     }
 </script>
 
 <style scoped>
+    .row_item {
+        width: 100%;
+        border-bottom: 1px solid gray;
+        display: flex;
+        flex-direction: row;
+        padding: 10px;
+    }
 
+    .row_item__content{
+        width: 90%;
+        font-size: 20px;
+        font-stretch: expanded;
+    }
+    .row_item__buttons{
+        display: flex;
+        flex-direction: row;
+
+    }
 </style>

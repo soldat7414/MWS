@@ -1,10 +1,13 @@
 <template>
-    <div>
-        <input type="text" v-model="firstName" id="firstName" placeholder="Ім\'я">
-        <input type="text" v-model="lastName" id="lastName" placeholder="Побатькові">
-        <input type="text" v-model="surname" id="surname" placeholder="Фамілія">
-        <input type="text" v-model="position" id="position" placeholder="Посада">
-        <input type="button" @click="save" value="Save">
+    <div class="form_item">
+        <div>
+            <text-input type="text" v-model="firstName" id="firstName" placeholder="Ім\'я"/>
+            <text-input type="text" v-model="lastName" id="lastName" placeholder="Побатькові"/>
+            <text-input type="text" v-model="surname" id="surname" placeholder="Фамілія"/>
+            <text-input type="text" v-model="position" id="position" placeholder="Посада"/>
+        </div>
+
+        <save-button class="form_item__btn" type="button" @click="save"/>
     </div>
 </template>
 
@@ -12,7 +15,7 @@
     import axios from "axios";
 
     export default {
-        props: ['persons', 'personAttr', 'hideForm'],
+        props: ['persons', 'personAttr'],
         data() {
             return {
                 firstName: '',
@@ -52,9 +55,7 @@
                 } else {
                     this.savePerson(person)
                 }
-                if(this.hideForm){
-                    this.hideForm()
-                }
+                this.$emit('update:hide', false)
             },
             async savePerson(person) {
                 try {
@@ -110,5 +111,13 @@
 </script>
 
 <style scoped>
+    .form_item {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
 
+    .form_item__btn {
+        align-self: end;
+    }
 </style>
